@@ -1,0 +1,6 @@
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\Clases\bin\Debug\Clases.dll
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\Clases\bin\Debug\Clases.pdb
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\Clases\obj\Debug\Clases.csprojAssemblyReference.cache
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\Clases\obj\Debug\Clases.csproj.CoreCompileInputs.cache
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\Clases\obj\Debug\Clases.dll
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\Clases\obj\Debug\Clases.pdb

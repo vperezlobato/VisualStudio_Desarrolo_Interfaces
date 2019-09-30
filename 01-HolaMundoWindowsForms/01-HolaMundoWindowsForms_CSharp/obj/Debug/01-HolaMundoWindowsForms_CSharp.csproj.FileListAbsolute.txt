@@ -1,0 +1,13 @@
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\bin\Debug\01-HolaMundoWindowsForms_CSharp.exe.config
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\bin\Debug\01-HolaMundoWindowsForms_CSharp.exe
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\bin\Debug\01-HolaMundoWindowsForms_CSharp.pdb
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\01-HolaMundoWindowsForms_CSharp.csprojAssemblyReference.cache
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\_01_HolaMundoWindowsForms_CSharp.Properties.Resources.resources
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\01-HolaMundoWindowsForms_CSharp.csproj.GenerateResource.cache
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\01-HolaMundoWindowsForms_CSharp.csproj.CoreCompileInputs.cache
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\01-HolaMundoWindowsForms_CSharp.exe
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\01-HolaMundoWindowsForms_CSharp.pdb
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\_01_HolaMundoWindowsForms_CSharp.Form1.resources
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\bin\Debug\Clases.dll
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\bin\Debug\Clases.pdb
+C:\Users\vmperez\Documents\GitHub\VisualStudio_Desarrolo_Interfaces\01-HolaMundoWindowsForms\01-HolaMundoWindowsForms_CSharp\obj\Debug\01-HolaMundoWindowsForms_CSharp.csproj.CopyComplete
