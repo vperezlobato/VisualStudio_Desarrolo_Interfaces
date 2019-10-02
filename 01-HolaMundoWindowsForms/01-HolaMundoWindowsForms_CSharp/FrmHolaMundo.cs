@@ -34,6 +34,7 @@ namespace _01_HolaMundoWindowsForms_CSharp
             oPersona.nombre = txtNombre.Text;
             oPersona.apellido1 = txtApellido1.Text;
             oPersona.apellido2 = txtApellido2.Text;
+            oPersona.fechaNacimiento = dateFecha.Value;
             if (String.IsNullOrEmpty(oPersona.nombre)
                 && !String.IsNullOrEmpty(oPersona.apellido1)
                 && !String.IsNullOrEmpty(oPersona.apellido2))
@@ -71,7 +72,8 @@ namespace _01_HolaMundoWindowsForms_CSharp
                 {
                     MessageBox.Show("Has dejado varios campos vacíos");
                 } else
-                    MessageBox.Show($"Hola {oPersona.nombre} {oPersona.apellido1} {oPersona.apellido2}");
+                    MessageBox.Show($"Hola {oPersona.nombre} {oPersona.apellido1} {oPersona.apellido2} " +
+                        $"con fecha de nacimiento {oPersona.fechaNacimiento}");
         }
 
 
