@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="BuscaMinas.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BuscaMinas"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:BuscaMinas.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    
+    <RelativePanel>
+        <GridView Name="casillero" ItemsSource="{x:Bind ViewModel.Tablero,Mode=TwoWay}" SelectedItem="{x:Bind ViewModel.CasillaSeleccionada, Mode=TwoWay}" Width="700" >
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" BorderBrush="Black" BorderThickness="1" >
+                        <Image Source="{Binding imagen}" Width="150" Height="150"></Image>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        </RelativePanel>
+</Page>

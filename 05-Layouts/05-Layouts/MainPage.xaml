@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="_05_Layouts.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_05_Layouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Border BorderThickness="20" BorderBrush="DeepSkyBlue" CornerRadius="30">
+        <StackPanel Name ="panel" Orientation="Vertical">
+            <Button x:Name="Boton1">
+                <Button.Padding>10</Button.Padding>
+                <Button.Margin>0,5,0,5</Button.Margin>
+                <Button.HorizontalAlignment>
+                    <HorizontalAlignment>Center</HorizontalAlignment>
+                </Button.HorizontalAlignment>
+                <Button.VerticalAlignment>
+                    <VerticalAlignment>Top</VerticalAlignment>
+                </Button.VerticalAlignment>
+                <Button.BorderBrush>Black</Button.BorderBrush>
+                <Button.Content>afgadfgggggggggg</Button.Content>
+            </Button>
+            <Button x:Name="Boton2">
+                <Button.Margin>10,10,10,5</Button.Margin>
+                <Button.HorizontalAlignment>center</Button.HorizontalAlignment>
+                <Button.VerticalAlignment>center</Button.VerticalAlignment>
+                <Button.Content>Boton 2</Button.Content>
+            </Button>
+            <Button x:Name="Boton3">
+                <Button.Margin>10,10,10,5</Button.Margin>
+                <Button.HorizontalAlignment>center</Button.HorizontalAlignment>
+                <Button.VerticalAlignment>center</Button.VerticalAlignment>
+                <Button.Content>Boton 3</Button.Content>
+            </Button>
+            <Button x:Name="Boton4">
+                <Button.Margin>10,10,10,5</Button.Margin>
+                <Button.HorizontalAlignment>center</Button.HorizontalAlignment>
+                <Button.VerticalAlignment>center</Button.VerticalAlignment>
+                <Button.Content>Otro boton</Button.Content>
+            </Button>
+            <StackPanel x:Name="panel2" Orientation="Horizontal"  HorizontalAlignment="Center">
+                <TextBlock>
+                    <TextBlock.Text>Nombre:</TextBlock.Text>
+                    <TextBlock.Margin>10,10,10,5</TextBlock.Margin>
+                </TextBlock>
+                <TextBox Margin="5,0,5,0">
+                </TextBox>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Page>

@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="MiniExamen_Victor.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MiniExamen_Victor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model ="using:MiniExamen_Victor.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <model:modeloVista></model:modeloVista>
+    </Page.DataContext>
+    <RelativePanel>
+        <ListView Name="listFabricantes" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+            ItemsSource="{Binding listadoFabricantes}" SelectedItem="{Binding fabricanteSeleccionado,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding marca}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Name="listaModelo" RelativePanel.Below="listFabricantes" RelativePanel.AlignLeftWithPanel="True"
+            ItemsSource="{Binding listadModelos}" SelectedItem="{Binding modeloSeleccionado,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding nombre}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Text="{Binding seleccionCompleta}" RelativePanel.Below="listaModelo" RelativePanel.AlignLeftWithPanel="True"></TextBlock>
+    </RelativePanel>
+</Page>

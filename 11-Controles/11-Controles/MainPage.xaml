@@ -1,0 +1,111 @@
+﻿<Page
+    x:Class="_11_Controles.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_11_Controles"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0">
+            <RadioButton Name="Yes" GroupName="RadioGroup1">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE73E;"/>
+                    <TextBlock Foreground="Green" Text="Yes"></TextBlock>
+                </StackPanel>
+            </RadioButton>
+            <RadioButton Foreground="Red" GroupName="RadioGroup1">No</RadioButton>
+            <RadioButton Foreground="Gray" GroupName="RadioGroup1"> Maybe</RadioButton>
+            <Button>Go</Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0">
+            <Button ToolTipService.ToolTip="Hello Darkness my old friend">Hello</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Pivot x:Name="pivot">
+
+                <PivotItem>
+                    <PivotItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Economia"></TextBlock>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE825;"></FontIcon>
+                    </StackPanel>
+                    </PivotItem.Header>
+                    <PivotItem.Content>
+                        <StackPanel Orientation="Vertical">
+                            <CheckBox>Setting One</CheckBox>
+                            <CheckBox>Setting Two</CheckBox>
+                            <CheckBox>Setting Three</CheckBox>
+                        </StackPanel>
+                    </PivotItem.Content>
+                    
+                </PivotItem>
+                <PivotItem Header="Tab two">
+                </PivotItem>
+                <PivotItem Header="Tab three">
+                </PivotItem>
+                <PivotItem Header="Tab four">
+                </PivotItem>
+            </Pivot>
+        </StackPanel>
+
+        <TextBox Grid.Row="1" Grid.Column="2" Height="70" AcceptsReturn="True" IsSpellCheckEnabled="True"></TextBox>
+
+
+        <PasswordBox Height="40" Grid.Row="1" Grid.Column="3"></PasswordBox>
+        
+        <ListBox Grid.Row="2" Grid.Column="0">
+            <ListBoxItem Content="Green"></ListBoxItem>
+            <ListBoxItem Content="Blue"></ListBoxItem>
+            <ListBoxItem Content="Yellow"></ListBoxItem>
+            <ListBoxItem Content="Red"></ListBoxItem>
+            <ListBoxItem Content="Black"></ListBoxItem>
+        </ListBox>
+
+        <ComboBox PlaceholderText="Seleccione" Grid.Row="2" Grid.Column="1">
+            <ComboBoxItem Content="1"></ComboBoxItem>
+            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="3"></ComboBoxItem>
+        </ComboBox>
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2">
+
+            <Slider Name="slider" TickFrequency="10" TickPlacement="BottomRight" Margin="5"></Slider>
+            <ProgressBar Value="{Binding ElementName = slider,Path =Value, Mode=OneWay}" Height="25" Width="350" HorizontalAlignment="Right" Margin="5"></ProgressBar>
+        </StackPanel>
+        <CalendarView Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"></CalendarView>
+
+        <CalendarDatePicker Grid.Row="3" Grid.Column="1"></CalendarDatePicker>
+        
+        <DatePicker Grid.Row="3" Grid.Column="2"></DatePicker>
+
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <Button Content="Cancel"></Button>
+            <Button Content="Default"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="3">
+            <Button Content="Make Reservation"></Button>
+            <Button Content="Validate Datepicker"></Button>
+        </StackPanel>
+
+        <TextBlock Grid.Column="0" Grid.Row="0">Choose</TextBlock>
+    </Grid>
+</Page>

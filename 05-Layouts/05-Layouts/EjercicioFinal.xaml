@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="_05_Layouts.EjercicioFinal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_05_Layouts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <RelativePanel Padding="20">
+        <Border Name="bordetxt1" BorderBrush="Black" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                 RelativePanel.AlignLeftWithPanel="True" BorderThickness="3">
+            <TextBlock Name="txt1" Text="Darle a tu cuerpo alegria macarena" TextWrapping="Wrap"/>
+        </Border>
+
+        <Border Name="bordetxt2"  RelativePanel.Below="bordetxt1" RelativePanel.AlignRightWithPanel="True"
+                 RelativePanel.AlignLeftWithPanel="True" Margin="0,20,0,0" BorderBrush="Black" BorderThickness="3">
+            <TextBlock Name="txt2" Text="Darle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarena" 
+                     TextWrapping="Wrap"/>
+        </Border>
+
+
+
+
+        <Grid Name="grid" BorderBrush="Black" RelativePanel.Below="bordetxt2"
+                RelativePanel.AlignRightWithPanel="True" RelativePanel.Above="bordeBajo"
+                RelativePanel.AlignLeftWithPanel="True" Margin="0,20,0,0" BorderThickness="3">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
+                <VariableSizedWrapGrid Name="rectangulos" Grid.Column="0" Orientation="Horizontal">
+                    <Rectangle Width="100" Height="100" Fill="Red" Margin="20"/>
+                    <Rectangle Width="100" Height="100" Fill="Green"/>
+                    <Rectangle Width="100" Height="100" Fill="Blue"/>
+                    <Rectangle Width="100" Height="100" Fill="Orange"/>
+                </VariableSizedWrapGrid>
+            </ScrollViewer>
+
+            <RelativePanel Padding="20" Grid.Column="1">
+
+                <Border  Name="bordeDerecha1" BorderBrush="Black" RelativePanel.AlignTopWithPanel="True" 
+                             BorderThickness="3" RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True" Margin="0,20,0,0">
+                    <TextBlock Name="txtDerecha1" Text="Darle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarena"
+                             TextWrapping="Wrap"/>
+                </Border>
+
+                <Border  Name="bordeDerecha2" BorderBrush="Black" RelativePanel.Below="bordeDerecha1" 
+                             BorderThickness="3" RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True" Margin="0,20,0,0">
+                    <TextBlock Name="txtDerecha2" Text="Darle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarena"
+                             TextWrapping="Wrap"/>
+                </Border>
+
+                <Border  Name="bordeDerecha3" BorderBrush="Black"  RelativePanel.Below="bordeDerecha2" RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True" Margin="0,20,0,0" BorderThickness="3">
+                    <TextBlock Name="txtDerecha3" Text="Darle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarena"
+                             TextWrapping="Wrap"/>
+                </Border>
+
+                <Border  Name="bordeDerecha4" BorderBrush="Black" RelativePanel.Below="bordeDerecha3" RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True" Margin="0,20,0,0"  BorderThickness="3">
+                    <TextBlock Name="txtDerecha4" Text="Darle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarena"
+                             TextWrapping="Wrap"/>
+                </Border>
+
+            </RelativePanel>
+
+        </Grid>
+        <Border Name="bordeBajo" RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" 
+                Margin="0,20,0,0" BorderBrush="Black" BorderThickness="3">
+            <TextBlock Name="txtAbajo" TextWrapping="Wrap" >Darle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarenaDarle a tu cuerpo alegria macarena</TextBlock>
+        </Border>
+
+    </RelativePanel>
+</Page>
