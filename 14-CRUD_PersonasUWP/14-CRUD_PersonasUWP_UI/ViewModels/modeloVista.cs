@@ -71,18 +71,16 @@ namespace _14_CRUD_PersonasUWP_UI
 
             set
             {
+                _textoABuscar = value;
                 if (!String.IsNullOrEmpty(_textoABuscar))
-                {
-                    _textoABuscar = value;
+                {                   
                     _BuscarCommand.Execute(null);
                     _BuscarCommand.RaiseCanExecuteChanged();
-                    NotifyPropertyChanged("listadoPersonaFiltrada");
                 }
                 else {
                     _listadoPersonaFiltrada = _listadoPersona;
-                    NotifyPropertyChanged("listadoPersonaFiltrada");
                 }
-
+                NotifyPropertyChanged("listadoPersonaFiltrada");
             }
         }
 
