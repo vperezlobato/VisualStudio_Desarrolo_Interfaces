@@ -1,4 +1,5 @@
-﻿using _14_CRUD_PersonasUWP_Entidades;
+﻿using _14_CRUD_PersonasUWP_DAL;
+using _14_CRUD_PersonasUWP_Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -22,22 +23,59 @@ namespace _14_CRUD_PersonasUWP_DAL
             SqlCommand comando = new SqlCommand();
             int filas = 0;
             SqlConnection conexion = miConexion.getConnection();
+            System.Type tipoDBNULL = DBNull.Value.GetType();
+            String fechaNacimiento,telefono,direccion,apellidos,nombre,idDepartamento;
+            try
+            {
+                comando.Connection = conexion;
 
-            comando.Connection = conexion;
+                if (objPersona.nombre != null)
+                {
+                    comando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = objPersona.nombre;
+                    nombre = "@nombre";
+                }
+                else
+                    nombre = "NULL";
+                if (objPersona.apellidos != null)
+                {
+                    comando.Parameters.Add("@apellidosPersona", System.Data.SqlDbType.VarChar).Value = objPersona.apellidos;
+                    apellidos = "@apellidosPersona";
+                }
+                else
+                    apellidos = "NULL";
 
-            comando.CommandText = "Insert Into Personas (NombrePersona,ApellidosPersona,IDDepartamento,FechaNacimientoPersona,TelefonoPersona,FotoPersona,Direccion) " +
-                "Values(@nombrePersona,@apellidosPersona,@IDDepartamento,@fechaNacimiento,@telefonoPersona,NULL,@direccion)";
+                    comando.Parameters.Add("@IDDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
+                    idDepartamento = "@IDDepartamento";                
 
-            comando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = objPersona.nombre;
-            comando.Parameters.Add("@apellidosPersona", System.Data.SqlDbType.VarChar).Value = objPersona.apellidos;
-            comando.Parameters.Add("@IDDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
-            comando.Parameters.Add("@fechaNacimiento", System.Data.SqlDbType.Date).Value = objPersona.fechaNacimiento;
-            comando.Parameters.Add("@telefonoPersona", System.Data.SqlDbType.VarChar).Value = objPersona.telefono;
-            comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
+                if (objPersona.fechaNacimiento != null) { 
+                    comando.Parameters.Add("@fechaNacimiento", System.Data.SqlDbType.DateTime).Value = objPersona.fechaNacimiento;
+                    fechaNacimiento = "@fechaNacimiento";
+                }else
+                    fechaNacimiento = "NULL";
 
-            filas = comando.ExecuteNonQuery();
+                if (objPersona.telefono != null) {
+                    comando.Parameters.Add("@telefonoPersona", System.Data.SqlDbType.VarChar).Value = objPersona.telefono;
+                    telefono = "@telefonoPersona";
+                } else
+                    telefono = "NULL";
 
-            miConexion.closeConnection(ref conexion);
+                if (objPersona.direccion != null) {
+                    comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
+                    direccion = "@direccion";
+                } else
+                    direccion = "NULL";
+
+                comando.CommandText = "Insert Into PD_Personas (NombrePersona,ApellidosPersona,IDDepartamento,FechaNacimientoPersona,TelefonoPersona,Direccion) " +
+                    "Values("+nombre+","+apellidos+","+idDepartamento+","+fechaNacimiento+","+telefono+","+direccion+")";
+
+                filas = comando.ExecuteNonQuery();
+
+            }catch (SqlException e) {
+                throw e;
+            }
+            finally {
+                miConexion.closeConnection(ref conexion); 
+            }
 
             return filas;
         }
@@ -53,15 +91,19 @@ namespace _14_CRUD_PersonasUWP_DAL
             int filas = 0;
             SqlCommand comando = new SqlCommand();
 
-            comando.Connection = conexion;
+            try{
+                comando.Connection = conexion;
 
-            comando.CommandText = "Delete FROM PD_Personas Where IdPersona = @id";
-            comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                comando.CommandText = "Delete FROM PD_Personas Where IdPersona = @id";                
 
-            filas = comando.ExecuteNonQuery();
-
-            miConexion.closeConnection(ref conexion);
-
+                filas = comando.ExecuteNonQuery();
+            }catch (SqlException e) {
+                throw e;
+            }
+            finally {
+                miConexion.closeConnection(ref conexion);
+            }
             return filas;
         }
 
@@ -76,24 +118,69 @@ namespace _14_CRUD_PersonasUWP_DAL
             SqlConnection conexion = miConexion.getConnection();
             SqlCommand comando = new SqlCommand();
             int filas = 0;
+            String fechaNacimiento, telefono, direccion, apellidos, nombre, idDepartamento,idPersona;
 
-            comando.Connection = conexion;
+            try
+            {
+                comando.Connection = conexion;
 
-            comando.CommandText = "UPDATE PD_Personas SET NombrePersona = @nombre,ApellidosPersona = @apellidos,IDDepartamento = @idDepartamento,FechaNacimientoPersona = @fechaNacimiento" +
-                "TelefonoPersona = @telefono,Direccion = @direccion Where IdPersona = @id ";
+                if (objPersona.nombre != null)
+                {
+                    comando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = objPersona.nombre;
+                    nombre = "@nombre";
+                }
+                else
+                    nombre = "NULL";
+                if (objPersona.apellidos != null)
+                {
+                    comando.Parameters.Add("@apellidosPersona", System.Data.SqlDbType.VarChar).Value = objPersona.apellidos;
+                    apellidos = "@apellidosPersona";
+                }
+                else
+                    apellidos = "NULL";
 
-            comando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = objPersona.nombre;
-            comando.Parameters.Add("@apellidos", System.Data.SqlDbType.VarChar).Value = objPersona.apellidos;
-            comando.Parameters.Add("@idDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
-            comando.Parameters.Add("@fechaNacimiento", System.Data.SqlDbType.Date).Value = objPersona.fechaNacimiento;
-            comando.Parameters.Add("@telefono", System.Data.SqlDbType.VarChar).Value = objPersona.telefono;
-            comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
-            comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = objPersona.idPersona;
+                
+                comando.Parameters.Add("@IDDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
+                idDepartamento = "@IDDepartamento";
 
-            filas = comando.ExecuteNonQuery();
+                if (objPersona.fechaNacimiento != null)
+                {
+                    comando.Parameters.Add("@fechaNacimiento", System.Data.SqlDbType.DateTime).Value = objPersona.fechaNacimiento;
+                    fechaNacimiento = "@fechaNacimiento";
+                }
+                else
+                    fechaNacimiento = "NULL";
 
-            miConexion.closeConnection(ref conexion);
+                if (objPersona.telefono != null)
+                {
+                    comando.Parameters.Add("@telefonoPersona", System.Data.SqlDbType.VarChar).Value = objPersona.telefono;
+                    telefono = "@telefonoPersona";
+                }
+                else
+                    telefono = "NULL";
 
+                if (objPersona.direccion != null)
+                {
+                    comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
+                    direccion = "@direccion";
+                }
+                else
+                    direccion = "NULL";
+
+                comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = objPersona.idPersona;
+                idPersona = "@id";
+
+                comando.CommandText = "UPDATE PD_Personas SET NombrePersona ="+nombre+",ApellidosPersona="+apellidos+",IDDepartamento="+idDepartamento+",FechaNacimientoPersona="+fechaNacimiento+","+
+                    "TelefonoPersona="+telefono+",Direccion="+direccion+" Where IdPersona="+idPersona;
+
+                filas = comando.ExecuteNonQuery();
+            }
+            catch (SqlException e) {
+                throw e;
+            }
+            finally {
+                miConexion.closeConnection(ref conexion);
+            }
             return filas;
 
         }
@@ -103,36 +190,47 @@ namespace _14_CRUD_PersonasUWP_DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Devuelve un objeto persona</returns>
-        public clsPersona detallesPersona_DAL(int id) {
+        public clsPersona buscarPersona_DAL(int id) {
             clsPersona objPersona = new clsPersona();
 
             clsMyConnection miConexion = new clsMyConnection();
             SqlConnection conexion = miConexion.getConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader miLector = null;
+            System.Type tipoDBNULL = DBNull.Value.GetType();
+            String idPersona;
+            try
+            {
+                comando.Connection = conexion;
+                comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                idPersona = "@id";
+                comando.CommandText = "Select * From PD_Personas Where Idpersona =" +idPersona;
+                miLector = comando.ExecuteReader();
 
-            comando.Connection = conexion;
-            comando.CommandText = "Select * From PD_Personas Where Idpersona = @id";
-            comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                if (miLector.HasRows)
+                {
+                    miLector.Read();
 
-            miLector = comando.ExecuteReader();
+                    objPersona.idPersona = miLector["IdPersona"].GetType() != tipoDBNULL ? (int)miLector["IdPersona"] : 0;
+                    objPersona.nombre = miLector["NombrePersona"].GetType() != tipoDBNULL ? (string)miLector["NombrePersona"] : null;
+                    objPersona.apellidos = miLector["ApellidosPersona"].GetType() != tipoDBNULL ? (string)miLector["ApellidosPersona"] : null;
+                    objPersona.fechaNacimiento = miLector["FechaNacimientoPersona"].GetType() != tipoDBNULL ? (DateTime)miLector["FechaNacimientoPersona"] : new DateTime();
+                    objPersona.direccion = miLector["Direccion"].GetType() != tipoDBNULL ? (string)miLector["Direccion"] : null;
+                    objPersona.telefono = miLector["TelefonoPersona"].GetType() != tipoDBNULL ? (string)miLector["TelefonoPersona"] : null;
+                    objPersona.idDepartamento = miLector["IDDepartamento"].GetType() != tipoDBNULL ? (int)miLector["IDDepartamento"] : 0;
+                }
 
-            if (miLector.HasRows) {
-                miLector.Read();
-
-                objPersona.idPersona = (int)miLector["IdPersona"];
-                objPersona.nombre = (string)miLector["NombrePersona"];
-                objPersona.apellidos = (string)miLector["ApellidosPersona"];
-                objPersona.idDepartamento = (int)miLector["IDDepartamento"];
-                objPersona.fechaNacimiento = (DateTime)miLector["FechaNacimientoPersona"];
-                objPersona.telefono = (string)miLector["TelefonoPersona"];
-                objPersona.direccion = (string)miLector["Direccion"];
+                miLector.Close();
             }
-
-            miLector.Close();
-            miConexion.closeConnection(ref conexion);
-
+            catch (SqlException e) {
+                throw e;
+            }
+            finally{
+                miConexion.closeConnection(ref conexion);
+            }
             return objPersona;
         }
+
+       
     }
 }

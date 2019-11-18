@@ -10,7 +10,8 @@ namespace _14_CRUD_PersonasUWP_BL
 {
     public class clsListadoDepartamentosBL
     {
-        public List<clsDepartamento> listadoDepartamentos() {
+        public List<clsDepartamento> listadoDepartamentos()
+        {
             List<clsDepartamento> listado = new List<clsDepartamento>();
 
             clsListadoDepartamentosDAL listadoDepartamentosDal = new clsListadoDepartamentosDAL();
@@ -18,6 +19,15 @@ namespace _14_CRUD_PersonasUWP_BL
             listado = listadoDepartamentosDal.listadoDepartamentos();
 
             return listado;
+        }
+
+        public clsDepartamento departamentoPorID(int id)
+        {
+            clsListadoDepartamentosDAL listBBDD = new clsListadoDepartamentosDAL();
+            clsDepartamento objDepartamento = new clsDepartamento();
+            objDepartamento = listBBDD.departamentoPorID(id);
+
+            return objDepartamento;
         }
     }
 }

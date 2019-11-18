@@ -10,7 +10,7 @@ namespace _14_CRUD_PersonasUWP_BL
 {
     public class clsListadoPersonasBL
     {
-        public List<clsPersona> listadoPersonas() {
+        public List<clsPersona> listadoPersonas_BL() {
 
             List<clsPersona> listado = new List<clsPersona>();
 
@@ -21,5 +21,18 @@ namespace _14_CRUD_PersonasUWP_BL
             return listado;
         }
 
+        public Boolean existePersona_BL(int id)
+        {
+
+            Boolean existe = false;
+
+            clsListadoPersonasDAL listadoPersonasDAL = new clsListadoPersonasDAL();
+
+            existe = listadoPersonasDAL.existePersona_DAL(id);
+
+            return existe;
+        }
     }
+
 }
+

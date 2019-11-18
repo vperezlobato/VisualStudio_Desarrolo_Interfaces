@@ -44,12 +44,12 @@ namespace _14_CRUD_PersonasUWP_BL
             return filas;
         }
 
-        public clsPersona detallesPersona_BL(int id) {
+        public clsPersona buscarPersona_BL(int id) {
             clsPersona objPersona = new clsPersona();
 
             gestionadoraPersonas_DAL gestionadora = new gestionadoraPersonas_DAL();
 
-            objPersona = gestionadora.detallesPersona_DAL(id);
+            objPersona = gestionadora.buscarPersona_DAL(id);
 
             return objPersona;
         }

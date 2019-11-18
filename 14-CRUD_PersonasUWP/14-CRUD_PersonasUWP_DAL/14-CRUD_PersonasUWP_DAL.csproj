@@ -122,8 +122,8 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Listados\clsListadoDepartamentosDAL.cs" />
-    <Compile Include="Listados\clsListadoPersonasDAL.cs" />
     <Compile Include="Conexion\clsMyConnection.cs" />
+    <Compile Include="Listados\clsListadoPersonasDAL.cs" />
     <Compile Include="Manejadoras\gestionadoraPersonas_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\_14_CRUD_PersonasUWP_DAL.rd.xml" />
