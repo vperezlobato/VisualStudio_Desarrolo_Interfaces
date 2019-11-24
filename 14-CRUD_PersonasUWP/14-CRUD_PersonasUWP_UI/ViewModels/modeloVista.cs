@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace _14_CRUD_PersonasUWP_UI
 {
@@ -26,7 +27,8 @@ namespace _14_CRUD_PersonasUWP_UI
         private DelegateCommand _GuardarCommand;
         private String _textoABuscar;
         private bool selectedItem;
-        String _errorNombre, _errorApellidos, _errorDireccion, _errorTelefono, _errorDepartamento;
+        private String _errorNombre, _errorApellidos, _errorDireccion, _errorTelefono, _errorDepartamento;
+        private BitmapImage _imagen;
         #endregion
 
         #region constructores
@@ -45,17 +47,20 @@ namespace _14_CRUD_PersonasUWP_UI
         public clsPersona personaSeleccionada {
             get { return _personaSeleccionada; }
             set {
-
                 if (_personaSeleccionada != value)
                 {
                     _personaSeleccionada = value;
                     _EliminarCommand.RaiseCanExecuteChanged();
                     _GuardarCommand.RaiseCanExecuteChanged();
                     SelectedItem = true;
+                    clsConversorImagen conversor = new clsConversorImagen();
+                    conversor.convertirABitmap(personaSeleccionada.foto);
+                    NotifyPropertyChanged("imagen");
                     NotifyPropertyChanged("personaSeleccionada");
                     NotifyPropertyChanged("EliminarCommand");
                     NotifyPropertyChanged("GuardarCommand");
-                    if (_personaSeleccionada != null) { 
+                    if (_personaSeleccionada != null)
+                    {
                         if (validarFormulario())
                         {
                             _errorNombre = "";
@@ -88,6 +93,16 @@ namespace _14_CRUD_PersonasUWP_UI
         {
             get { return _listadoPersonaFiltrada; }
             set { _listadoPersonaFiltrada = value; }
+        }
+
+        public BitmapImage imagen {
+            get { return _imagen; }
+            set { 
+                _imagen = value;
+                clsConversorImagen conversor = new clsConversorImagen();
+                conversor.convertirAByte(_imagen);
+                INotifyPropertyChanged("imagen");
+            }
         }
 
         public String textoABuscar
@@ -395,4 +410,5 @@ namespace _14_CRUD_PersonasUWP_UI
         }
         #endregion
     }
+
 }
