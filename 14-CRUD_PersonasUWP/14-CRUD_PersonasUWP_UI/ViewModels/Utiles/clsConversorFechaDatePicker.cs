@@ -14,9 +14,9 @@ namespace _14_CRUD_PersonasUWP_UI.ViewModels.Utils
             DateTime fecha = (DateTime)value;
 
             //Para evitar que pete por tener el año como 1
-            if (fecha.Year < 1900)
+            if (fecha.Year < 1919)
             {
-                fecha = new DateTime(1900, fecha.Month, fecha.Day);
+                fecha = new DateTime(1919, fecha.Month, fecha.Day);
             }
 
             DateTimeOffset fechaDevuelta = new DateTimeOffset(fecha);

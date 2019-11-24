@@ -30,7 +30,6 @@ namespace _14_CRUD_PersonasUWP_UI
         private DelegateCommand _InsertarCommand;
         private DelegateCommand _GuardarCommand;
         private String _textoABuscar;
-        private bool selectedItem;
         private String _errorNombre, _errorApellidos, _errorDireccion, _errorTelefono, _errorDepartamento;
         private BitmapImage _imagen;
         #endregion
@@ -38,7 +37,6 @@ namespace _14_CRUD_PersonasUWP_UI
         #region constructores
         //constructor por defecto
         public modeloVista() {
-            selectedItem = false;
             //rellenamos el constructor con el listado de personas
             clsListadoPersonasBL listPersonas = new clsListadoPersonasBL();
             clsListadoDepartamentosBL listDepartamentos = new clsListadoDepartamentosBL();
@@ -57,15 +55,20 @@ namespace _14_CRUD_PersonasUWP_UI
                     _personaSeleccionada = value;
                     _EliminarCommand.RaiseCanExecuteChanged();
                     _GuardarCommand.RaiseCanExecuteChanged();
-                    SelectedItem = true;
                     if (personaSeleccionada != null)
                     {
                         convertirBitmap();
                     }
-                    NotifyPropertyChanged("imagen");
+                    if (personaSeleccionada != null)
+                    {
+                        if (personaSeleccionada.foto == null)
+                        {
+                            _imagen = null;
+                        }
+                    }
                     NotifyPropertyChanged("personaSeleccionada");
-                    NotifyPropertyChanged("EliminarCommand");
                     NotifyPropertyChanged("GuardarCommand");
+                    NotifyPropertyChanged("imagen");
                     limpiarFormulario();
                 }
             }
@@ -113,19 +116,6 @@ namespace _14_CRUD_PersonasUWP_UI
                     _listadoPersonaFiltrada = _listadoPersona;
                 }
                 NotifyPropertyChanged("listadoPersonaFiltrada");
-            }
-        }
-
-        public bool SelectedItem
-        {
-            get
-            {
-                return selectedItem;
-            }
-            set
-            {
-                selectedItem = value;
-                NotifyPropertyChanged("SelectedItem");
             }
         }
 
@@ -244,7 +234,6 @@ namespace _14_CRUD_PersonasUWP_UI
                         confirmadoCorrectamente.Content = "Se ha guardado correctamente";
                         confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
                         ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
-                        limpiarFormulario();
                     }
                 }
                 else
@@ -258,7 +247,6 @@ namespace _14_CRUD_PersonasUWP_UI
                         confirmadoCorrectamente.Content = "Se ha insertado correctamente";
                         confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
                         ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
-                        limpiarFormulario();
                     }
                 }
             }
@@ -268,7 +256,7 @@ namespace _14_CRUD_PersonasUWP_UI
         private bool GuardarCommand_CanExecuted() {
             bool guardable = false;
 
-            if (personaSeleccionada != null && SelectedItem)
+            if (personaSeleccionada != null)
             {
                 guardable = true;
             }
@@ -281,14 +269,16 @@ namespace _14_CRUD_PersonasUWP_UI
         /// </summary>
         private void InsertarCommand_Executed()
         {
-            _personaSeleccionada = null;
+            _personaSeleccionada = null;//lo uso para desactivar el comando eliminar cuando se hace una actualizacion y despues instancio una nueva persona para activar el guardar.
             NotifyPropertyChanged("personaSeleccionada");
             NotifyPropertyChanged("EliminarCommand");
             _personaSeleccionada = new clsPersona();
-            _imagen = null;
+            _imagen = null; //es necesario para que no se quede la imagen de la personaSeleccionada
+            _GuardarCommand.CanExecute(_personaSeleccionada); //es necesario cuando abres la aplicacion la primera vez y quieres añadir una persona.
+            NotifyPropertyChanged("GuardarCommand");
             NotifyPropertyChanged("imagen");
             NotifyPropertyChanged("personaSeleccionada");
-
+            limpiarFormulario();
         }
 
         /// <summary>
@@ -315,7 +305,6 @@ namespace _14_CRUD_PersonasUWP_UI
                 if (filasAfectadas == 1)
                 {
                     actualizar();
-
                     eliminadoCorrectamente.Title = "Guardado";
                     eliminadoCorrectamente.Content = "Se ha eliminado correctamente";
                     eliminadoCorrectamente.PrimaryButtonText = "Aceptar";
@@ -328,7 +317,7 @@ namespace _14_CRUD_PersonasUWP_UI
         {
             bool eliminable = false;
 
-            if (personaSeleccionada != null && SelectedItem)
+            if (personaSeleccionada != null)
             {
                 eliminable = true;
             }
@@ -365,14 +354,19 @@ namespace _14_CRUD_PersonasUWP_UI
         }
 
         /// <summary>
-        /// Metodo para actualizar el listado. 
+        /// Metodo para actualizar el listado y limpiar el formulario. 
         /// </summary>
         public void actualizar() {
             clsListadoPersonasBL listPersonas = new clsListadoPersonasBL();
-            _listadoPersonaFiltrada = new ObservableCollection<clsPersona>(listPersonas.listadoPersonas_BL());
-            SelectedItem = false;
-            limpiarFormulario();
+            _listadoPersonaFiltrada = new ObservableCollection<clsPersona>(listPersonas.listadoPersonas_BL());           
             NotifyPropertyChanged("listadoPersonaFiltrada");
+
+            _personaSeleccionada = null; 
+            NotifyPropertyChanged("personaSeleccionada");
+            NotifyPropertyChanged("EliminarCommand");
+            _imagen = null;
+            NotifyPropertyChanged("imagen");
+            limpiarFormulario();
         }
 
         /// <summary>
@@ -447,25 +441,20 @@ namespace _14_CRUD_PersonasUWP_UI
         }
 
         /// <summary>
-        /// Metodo para limpiar el formulario
+        /// Metodo para limpiar el formulario.
         /// </summary>
         public void limpiarFormulario() {
-            if (_personaSeleccionada != null)
-            {
-                if (validarFormulario())
-                {
-                    _errorNombre = "";
-                    _errorApellidos = "";
-                    _errorDireccion = "";
-                    _errorTelefono = "";
-                    _errorDepartamento = "";
-                    NotifyPropertyChanged("ErrorNombre");
-                    NotifyPropertyChanged("ErrorApellidos");
-                    NotifyPropertyChanged("ErrorDireccion");
-                    NotifyPropertyChanged("ErrorDepartamento");
-                    NotifyPropertyChanged("ErrorTelefono");
-                }
-            }
+            _errorNombre = "";
+            _errorApellidos = "";
+            _errorDireccion = "";
+            _errorTelefono = "";
+            _errorDepartamento = "";
+            NotifyPropertyChanged("ErrorNombre");
+            NotifyPropertyChanged("ErrorApellidos");
+            NotifyPropertyChanged("ErrorDireccion");
+            NotifyPropertyChanged("ErrorDepartamento");
+            NotifyPropertyChanged("ErrorTelefono");
+                
         }
         /// <summary>
         /// Este metodo llama al metodo que convierte un array de bytes a bitmap.(Es necesario por el await)
