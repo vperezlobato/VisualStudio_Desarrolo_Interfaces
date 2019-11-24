@@ -1,5 +1,6 @@
 ﻿using _14_CRUD_PersonasUWP_BL;
 using _14_CRUD_PersonasUWP_Entidades;
+using _14_CRUD_PersonasUWP_UI.ViewModels.Utiles;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -47,35 +51,31 @@ namespace _14_CRUD_PersonasUWP_UI
         public clsPersona personaSeleccionada {
             get { return _personaSeleccionada; }
             set {
+               
                 if (_personaSeleccionada != value)
                 {
                     _personaSeleccionada = value;
                     _EliminarCommand.RaiseCanExecuteChanged();
                     _GuardarCommand.RaiseCanExecuteChanged();
                     SelectedItem = true;
-                    clsConversorImagen conversor = new clsConversorImagen();
-                    conversor.convertirABitmap(personaSeleccionada.foto);
+                    if (personaSeleccionada != null)
+                    {
+                        convertirBitmap();
+                    }
                     NotifyPropertyChanged("imagen");
                     NotifyPropertyChanged("personaSeleccionada");
                     NotifyPropertyChanged("EliminarCommand");
                     NotifyPropertyChanged("GuardarCommand");
-                    if (_personaSeleccionada != null)
-                    {
-                        if (validarFormulario())
-                        {
-                            _errorNombre = "";
-                            _errorApellidos = "";
-                            _errorDireccion = "";
-                            _errorTelefono = "";
-                            _errorDepartamento = "";
-                            NotifyPropertyChanged("ErrorNombre");
-                            NotifyPropertyChanged("ErrorApellidos");
-                            NotifyPropertyChanged("ErrorDireccion");
-                            NotifyPropertyChanged("ErrorDepartamento");
-                            NotifyPropertyChanged("ErrorTelefono");
-                        }
-                    }
+                    limpiarFormulario();
                 }
+            }
+        }
+        
+        public BitmapImage imagen {
+            get { return _imagen; }
+            set { 
+                _imagen = value;         
+                NotifyPropertyChanged("imagen");
             }
         }
         public ObservableCollection<clsPersona> listadoPersona
@@ -93,16 +93,6 @@ namespace _14_CRUD_PersonasUWP_UI
         {
             get { return _listadoPersonaFiltrada; }
             set { _listadoPersonaFiltrada = value; }
-        }
-
-        public BitmapImage imagen {
-            get { return _imagen; }
-            set { 
-                _imagen = value;
-                clsConversorImagen conversor = new clsConversorImagen();
-                conversor.convertirAByte(_imagen);
-                INotifyPropertyChanged("imagen");
-            }
         }
 
         public String textoABuscar
@@ -232,6 +222,9 @@ namespace _14_CRUD_PersonasUWP_UI
             }
         }
 
+        /// <summary>
+        /// Executed de Guardar para actualizar o insertar a una persona.
+        /// </summary>
         private async void GuardarCommand_Executed() {
             int filasAfectadas;
             gestionadoraPersonas_BL gestionadora = new gestionadoraPersonas_BL();
@@ -242,6 +235,7 @@ namespace _14_CRUD_PersonasUWP_UI
             {
                 if (listadoPersonasBL.existePersona_BL(_personaSeleccionada.idPersona))
                 {
+                    
                     filasAfectadas = gestionadora.editarPersona_BL(_personaSeleccionada);
                     if (filasAfectadas == 1)
                     {
@@ -250,10 +244,12 @@ namespace _14_CRUD_PersonasUWP_UI
                         confirmadoCorrectamente.Content = "Se ha guardado correctamente";
                         confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
                         ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
+                        limpiarFormulario();
                     }
                 }
                 else
                 {
+                    
                     filasAfectadas = gestionadora.insertarPersona_BL(_personaSeleccionada);
                     if (filasAfectadas == 1)
                     {
@@ -262,6 +258,7 @@ namespace _14_CRUD_PersonasUWP_UI
                         confirmadoCorrectamente.Content = "Se ha insertado correctamente";
                         confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
                         ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
+                        limpiarFormulario();
                     }
                 }
             }
@@ -279,14 +276,24 @@ namespace _14_CRUD_PersonasUWP_UI
             return guardable;
         }
 
+        /// <summary>
+        /// Executed de InsertarCommand para crear una nueva persona.
+        /// </summary>
         private void InsertarCommand_Executed()
         {
-            _personaSeleccionada = new clsPersona();
+            _personaSeleccionada = null;
             NotifyPropertyChanged("personaSeleccionada");
-            NotifyPropertyChanged("GuardarCommand");
+            NotifyPropertyChanged("EliminarCommand");
+            _personaSeleccionada = new clsPersona();
+            _imagen = null;
+            NotifyPropertyChanged("imagen");
+            NotifyPropertyChanged("personaSeleccionada");
 
         }
 
+        /// <summary>
+        /// Executed de EliminarCommand para borrar a la persona.
+        /// </summary>
         private async void EliminarCommand_Executed()
         {
             int filasAfectadas = 0;
@@ -347,6 +354,9 @@ namespace _14_CRUD_PersonasUWP_UI
         #endregion
 
         #region metodo añadidos
+        /// <summary>
+        /// Metodo para filtrar el listado de personas segun lo escrito en el texto de busqueda.
+        /// </summary>
         public void filtrar()
         {
             ObservableCollection<clsPersona> listadoPersonasFiltradas = new ObservableCollection<clsPersona>(_listadoPersona.ToList().FindAll(persona => String.Concat(persona.nombre, " ", persona.apellidos).Contains(_textoABuscar)));
@@ -361,6 +371,7 @@ namespace _14_CRUD_PersonasUWP_UI
             clsListadoPersonasBL listPersonas = new clsListadoPersonasBL();
             _listadoPersonaFiltrada = new ObservableCollection<clsPersona>(listPersonas.listadoPersonas_BL());
             SelectedItem = false;
+            limpiarFormulario();
             NotifyPropertyChanged("listadoPersonaFiltrada");
         }
 
@@ -372,9 +383,15 @@ namespace _14_CRUD_PersonasUWP_UI
 
             bool valido = true;
 
-            if (String.IsNullOrEmpty(personaSeleccionada.nombre)) {
+            if (String.IsNullOrEmpty(personaSeleccionada.nombre))
+            {
                 valido = false;
                 _errorNombre = "Introduce un nombre";
+                NotifyPropertyChanged("ErrorNombre");
+            }
+            else
+            {
+                _errorNombre = "";
                 NotifyPropertyChanged("ErrorNombre");
             }
 
@@ -382,6 +399,10 @@ namespace _14_CRUD_PersonasUWP_UI
             {
                 valido = false;
                 _errorApellidos = "Introduce algun apellido";
+                NotifyPropertyChanged("ErrorApellidos");
+            }else
+            {
+                _errorApellidos = "";
                 NotifyPropertyChanged("ErrorApellidos");
             }
 
@@ -391,11 +412,21 @@ namespace _14_CRUD_PersonasUWP_UI
                 _errorDepartamento = "Selecciona un departamento";
                 NotifyPropertyChanged("ErrorDepartamento");
             }
+            else
+            {
+                _errorDepartamento = "";
+                NotifyPropertyChanged("ErrorDepartamento");
+            }
 
             if (String.IsNullOrEmpty(personaSeleccionada.telefono))
             {
                 valido = false;
                 _errorTelefono = "Introduce un telefono";
+                NotifyPropertyChanged("ErrorTelefono");
+            }
+            else
+            {
+                _errorTelefono = "";
                 NotifyPropertyChanged("ErrorTelefono");
             }
 
@@ -405,10 +436,89 @@ namespace _14_CRUD_PersonasUWP_UI
                 _errorDireccion = "Introduce una direccion";
                 NotifyPropertyChanged("ErrorDireccion");
             }
+            else
+            {
+                _errorDireccion = "";
+                NotifyPropertyChanged("ErrorDireccion");
+            }
+
             return valido;
         
         }
+
+        /// <summary>
+        /// Metodo para limpiar el formulario
+        /// </summary>
+        public void limpiarFormulario() {
+            if (_personaSeleccionada != null)
+            {
+                if (validarFormulario())
+                {
+                    _errorNombre = "";
+                    _errorApellidos = "";
+                    _errorDireccion = "";
+                    _errorTelefono = "";
+                    _errorDepartamento = "";
+                    NotifyPropertyChanged("ErrorNombre");
+                    NotifyPropertyChanged("ErrorApellidos");
+                    NotifyPropertyChanged("ErrorDireccion");
+                    NotifyPropertyChanged("ErrorDepartamento");
+                    NotifyPropertyChanged("ErrorTelefono");
+                }
+            }
+        }
+        /// <summary>
+        /// Este metodo llama al metodo que convierte un array de bytes a bitmap.(Es necesario por el await)
+        /// </summary>
+        public async void convertirBitmap()
+        {
+            clsConversorImagen conversor = new clsConversorImagen();
+            if (personaSeleccionada.foto != null)
+            {
+                Task<BitmapImage> taskImage = conversor.convertirABitmap(personaSeleccionada.foto);
+                _imagen = await taskImage;
+                NotifyPropertyChanged("imagen");
+            }
+        }
+
+        /// <summary>
+        /// Metodo para añadir una foto al formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public async void Adjuntar_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            PersonPicture personPicture = (PersonPicture)sender;
+            var fileOpenPicker = new FileOpenPicker();
+            fileOpenPicker.ViewMode = PickerViewMode.Thumbnail;
+            fileOpenPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            fileOpenPicker.FileTypeFilter.Add(".png");
+            fileOpenPicker.FileTypeFilter.Add(".jpg");
+            fileOpenPicker.FileTypeFilter.Add(".jpeg");
+            fileOpenPicker.FileTypeFilter.Add(".bmp");
+            fileOpenPicker.FileTypeFilter.Add(".jfif");
+            var storageFile = await fileOpenPicker.PickSingleFileAsync();
+
+            if (storageFile != null)
+            {
+                // Ensure the stream is disposed once the image is loaded
+                using (IRandomAccessStream fileStream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                {
+                    // Set the image source to the selected bitmap
+                    BitmapImage bitmapImage = new BitmapImage();
+
+                    await bitmapImage.SetSourceAsync(fileStream);
+                    personPicture.ProfilePicture = bitmapImage;
+
+                    clsConversorImagen conversor = new clsConversorImagen();
+                    Task<byte[]> taskImage = conversor.convertirAByte(storageFile);
+                    byte[] foto = await taskImage;
+                    personaSeleccionada.foto = foto;
+                }
+            }
+        }
+        
         #endregion
     }
-
 }

@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="ViewModels\modeloVista.cs" />
     <Compile Include="ViewModels\Utiles\clsConversorFechaDatePicker.cs" />
+    <Compile Include="ViewModels\Utiles\clsConversorImagen.cs" />
     <Compile Include="ViewModels\Utiles\clsVMBase.cs" />
     <Compile Include="ViewModels\Utiles\DelegateCommand.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
@@ -135,6 +136,7 @@
     <None Include="14-CRUD_PersonasUWP_UI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\contacto.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

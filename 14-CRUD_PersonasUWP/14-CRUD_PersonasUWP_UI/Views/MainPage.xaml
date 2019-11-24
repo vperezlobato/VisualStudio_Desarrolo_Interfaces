@@ -20,11 +20,11 @@
         <miConversor:clsConversorFechaDatePicker x:Key="conversorFechaDatePicker"/>
     </Page.Resources>
 
-    <RelativePanel Background="Gray">
+    <RelativePanel>
 
         <!-->Menu con subMenus<-->
-        <Windows10version1809:MenuBar Name="menu" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
-            <Windows10version1809:MenuBarItem Title="Archivo">
+        <Windows10version1809:MenuBar Background="LightBlue" Name="menu" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+            <Windows10version1809:MenuBarItem Title="Archivo" >
                 <MenuFlyoutSubItem Text="Editar">
                     <MenuFlyoutItem Text="Eliminar" Command="{Binding EliminarCommand}"/>
                     <MenuFlyoutItem Text="Nuevo" Command="{Binding InsertarCommand}"/>
@@ -33,42 +33,40 @@
             </Windows10version1809:MenuBarItem>
         </Windows10version1809:MenuBar>
 
-        <StackPanel Name="stkBotonesLista" Orientation="Vertical" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="menu">
+        <StackPanel Background="LightBlue" Name="stkBotonesLista" Orientation="Vertical" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="menu" RelativePanel.AlignBottomWithPanel="True">
+            <RelativePanel Margin="0,10,0,0" Name="stkPanel">
+                <TextBox RelativePanel.AlignVerticalCenterWithPanel="True" PlaceholderText="Buscar personas" Text="{Binding textoABuscar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" Name="txtbBuscar" ></TextBox>
+                <AppBarButton RelativePanel.RightOf="txtbBuscar" Name="appbbtnBuscar" Command="{Binding BuscarCommand}" Icon="Find" Label="Buscar" ></AppBarButton>
+            </RelativePanel>
             
-        <StackPanel Name="stkBotones" Orientation="Horizontal"  >
-            <AppBarButton Name="appbbtnBorrar" Command="{Binding EliminarCommand}" Label="Borrar" Icon="Delete" ></AppBarButton>
-            <AppBarButton Name="appbbtnAñadir" Command="{Binding InsertarCommand}" Icon="Add" Label="Añadir"></AppBarButton>
-            <AppBarButton HorizontalAlignment="Right" Icon="Save" Label="Guardar" Command="{Binding GuardarCommand}"></AppBarButton>
-        </StackPanel>
-            
-        <!-->Listado de personas<-->
-        <ListView Name="listview" RightTapped="ListaBotones_RightTapped"         
-                  ItemsSource="{Binding listadoPersonaFiltrada,Mode=TwoWay}" SelectedItem="{Binding personaSeleccionada,Mode=TwoWay}">
-            <FlyoutBase.AttachedFlyout>
-                <MenuFlyout x:Name="menuFlyout">
-                    <MenuFlyoutItem Text="Eliminar"  Command="{Binding EliminarCommand}"/>
-                </MenuFlyout>
-            </FlyoutBase.AttachedFlyout>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Name="stk" Orientation="Horizontal">
-                        <TextBlock Name="txtbNombre" Foreground="Black" Text="{Binding Path=nombre}"></TextBlock>
-                        <TextBlock Name="txtbApellidos" Foreground="Black" Text="{Binding Path=apellidos}" Margin="5,0,0,0"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        </StackPanel>
-        
-        <StackPanel Margin="0,10,0,0" Name="stkPanel" Orientation="Horizontal" RelativePanel.Below="menu" RelativePanel.AlignHorizontalCenterWithPanel="True" >
-            <TextBlock VerticalAlignment="Center" Name="txtBuscar" Text="Buscar:"></TextBlock>
-            <TextBox Text="{Binding textoABuscar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"  Name="txtbBuscar" ></TextBox>
+            <StackPanel Name="stkBotones" Orientation="Horizontal" >
+                <AppBarButton Name="appbbtnBorrar" Command="{Binding EliminarCommand}" Label="Borrar" Icon="Delete" ></AppBarButton>
+                <AppBarButton Name="appbbtnAñadir" Command="{Binding InsertarCommand}" Icon="Add" Label="Añadir"></AppBarButton>
+                <AppBarButton HorizontalAlignment="Right" Icon="Save" Label="Guardar" Command="{Binding GuardarCommand}"></AppBarButton>
+            </StackPanel>
+
+            <!-->Listado de personas<-->
+            <ListView Name="listview" RightTapped="ListaBotones_RightTapped"         
+                      ItemsSource="{Binding listadoPersonaFiltrada,Mode=TwoWay}" SelectedItem="{Binding personaSeleccionada,Mode=TwoWay}">
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout x:Name="menuFlyout">
+                        <MenuFlyoutItem Text="Eliminar"  Command="{Binding EliminarCommand}"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Name="stk" Orientation="Horizontal">
+                            <TextBlock Name="txtbNombre" Foreground="Black" Text="{Binding Path=nombre}"></TextBlock>
+                            <TextBlock Name="txtbApellidos" Foreground="Black" Text="{Binding Path=apellidos}" Margin="5,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
 
         <!-->Boton buscar<-->
-        <AppBarButton Name="appbbtnBuscar" Command="{Binding BuscarCommand}" Icon="Find" Label="Buscar" RelativePanel.RightOf="stkPanel" RelativePanel.AlignTopWith="stkPanel"></AppBarButton>
-
-        <Grid Name="grid" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Background="Orange" HorizontalAlignment="Stretch">
+       
+        <Grid Name="grid" Margin="0,30,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -100,16 +98,17 @@
             <DatePicker  Margin="10" Grid.Row="3" Grid.Column="1" Date="{Binding Path=personaSeleccionada.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource conversorFechaDatePicker}}"/>
             <TextBox Name="txtboxTelefono" MaxLength="15" Margin="10" Text="{Binding Path=personaSeleccionada.telefono,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"></TextBox>
             <TextBox Name="txtboxDireccion" MaxLength="30" MinHeight="80" MaxHeight="150" Margin="5,10,10,0" Text="{Binding Path=personaSeleccionada.direccion,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
-            <ComboBox HorizontalAlignment="Center" Margin="10" Name="cbxNombreDepartamento" Grid.Row="7" Grid.Column="1" ItemsSource="{Binding listadoDepartamentos}" DisplayMemberPath="nombre" SelectedValuePath="id" SelectedValue="{Binding personaSeleccionada.idDepartamento, Mode=TwoWay}"/>
+            <ComboBox PlaceholderText="Selecciona un departamento" MinWidth="220" HorizontalAlignment="Center" Margin="10" Name="cbxNombreDepartamento" Grid.Row="7" Grid.Column="1" ItemsSource="{Binding listadoDepartamentos}" DisplayMemberPath="nombre" SelectedValuePath="id" SelectedValue="{Binding personaSeleccionada.idDepartamento, Mode=TwoWay}"/>
             <AppBarButton HorizontalAlignment="Right" Icon="Save" Label="Guardar" Command="{Binding GuardarCommand}" Grid.Column="1" Grid.Row="8"></AppBarButton>
-            <PersonPicture Grid.ColumnSpan="3" Grid.Row="0"></PersonPicture>
+            <PersonPicture  Name="personPicture" Grid.ColumnSpan="3" Grid.Row="0" ProfilePicture="{Binding imagen,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Tapped="{x:Bind ViewModel.Adjuntar_Click_1}"/>
+
             <!--Columna 3 -->
-            <TextBlock Name="txtbErrorNombre" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Text="{Binding ErrorNombre}"></TextBlock>
-            <TextBlock Name="txtbErrorApellidos" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding ErrorApellidos}"></TextBlock>
-            <TextBlock Name="txtbErrorFechaNac" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Text="{Binding ErrorFechaNacimiento}"></TextBlock>
-            <TextBlock Name="txtbErrorTelefono" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Text="{Binding ErrorTelefono}"></TextBlock>
-            <TextBlock Name="txtbErrorDireccion" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Text="{Binding ErrorDireccion}"></TextBlock>
-            <TextBlock Name="txtbErrorDepartamentos" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Text="{Binding ErrorDepartamento}"></TextBlock>
+            <TextBlock Name="txtbErrorNombre" Foreground="Red" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Text="{Binding ErrorNombre}"></TextBlock>
+            <TextBlock Name="txtbErrorApellidos" Foreground="Red" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding ErrorApellidos}"></TextBlock>
+            <TextBlock Name="txtbErrorFechaNac" Foreground="Red" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Text="{Binding ErrorFechaNacimiento}"></TextBlock>
+            <TextBlock Name="txtbErrorTelefono" Foreground="Red" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Text="{Binding ErrorTelefono}"></TextBlock>
+            <TextBlock Name="txtbErrorDireccion" Foreground="Red" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Text="{Binding ErrorDireccion}"></TextBlock>
+            <TextBlock Name="txtbErrorDepartamentos" Foreground="Red" Margin="5" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Text="{Binding ErrorDepartamento}"></TextBlock>
 
         </Grid>
 

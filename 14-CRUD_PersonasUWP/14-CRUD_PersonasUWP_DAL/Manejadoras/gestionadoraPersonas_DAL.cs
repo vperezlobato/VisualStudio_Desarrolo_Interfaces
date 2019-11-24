@@ -24,7 +24,7 @@ namespace _14_CRUD_PersonasUWP_DAL
             int filas = 0;
             SqlConnection conexion = miConexion.getConnection();
             System.Type tipoDBNULL = DBNull.Value.GetType();
-            String fechaNacimiento,telefono,direccion,apellidos,nombre,idDepartamento;
+            String foto,fechaNacimiento,telefono,direccion,apellidos,nombre,idDepartamento;
             try
             {
                 comando.Connection = conexion;
@@ -59,14 +59,22 @@ namespace _14_CRUD_PersonasUWP_DAL
                 } else
                     telefono = "NULL";
 
+                if (objPersona.foto != null)
+                {
+                    comando.Parameters.Add("@fotoPersona", System.Data.SqlDbType.Binary).Value = objPersona.foto;
+                    foto = "@fotoPersona";
+                }
+                else
+                    foto = "NULL";
+
                 if (objPersona.direccion != null) {
                     comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
                     direccion = "@direccion";
                 } else
                     direccion = "NULL";
 
-                comando.CommandText = "Insert Into PD_Personas (NombrePersona,ApellidosPersona,IDDepartamento,FechaNacimientoPersona,TelefonoPersona,Direccion) " +
-                    "Values("+nombre+","+apellidos+","+idDepartamento+","+fechaNacimiento+","+telefono+","+direccion+")";
+                comando.CommandText = "Insert Into PD_Personas (NombrePersona,ApellidosPersona,IDDepartamento,FechaNacimientoPersona,TelefonoPersona,FotoPersona,Direccion) " +
+                    "Values("+nombre+","+apellidos+","+idDepartamento+","+fechaNacimiento+","+telefono+","+foto+","+direccion+")";
 
                 filas = comando.ExecuteNonQuery();
 
@@ -112,13 +120,14 @@ namespace _14_CRUD_PersonasUWP_DAL
         /// </summary>
         /// <param name="objPersona"></param>
         /// <returns>Devuelve el numero de filas afectadas</returns>
-        public int editarPersona_DAL(clsPersona objPersona) {
+        public int editarPersona_DAL(clsPersona objPersona)
+        {
 
             clsMyConnection miConexion = new clsMyConnection();
             SqlConnection conexion = miConexion.getConnection();
             SqlCommand comando = new SqlCommand();
             int filas = 0;
-            String fechaNacimiento, telefono, direccion, apellidos, nombre, idDepartamento,idPersona;
+            String fechaNacimiento, telefono, direccion, apellidos, nombre, idDepartamento, idPersona, foto;
 
             try
             {
@@ -139,7 +148,7 @@ namespace _14_CRUD_PersonasUWP_DAL
                 else
                     apellidos = "NULL";
 
-                
+
                 comando.Parameters.Add("@IDDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
                 idDepartamento = "@IDDepartamento";
 
@@ -159,6 +168,14 @@ namespace _14_CRUD_PersonasUWP_DAL
                 else
                     telefono = "NULL";
 
+                if (objPersona.foto != null)
+                {
+                    comando.Parameters.Add("@fotoPersona", System.Data.SqlDbType.Binary).Value = objPersona.foto;
+                    foto = "@fotoPersona";
+                }
+                else
+                    foto = "NULL";
+
                 if (objPersona.direccion != null)
                 {
                     comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
@@ -170,15 +187,17 @@ namespace _14_CRUD_PersonasUWP_DAL
                 comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = objPersona.idPersona;
                 idPersona = "@id";
 
-                comando.CommandText = "UPDATE PD_Personas SET NombrePersona ="+nombre+",ApellidosPersona="+apellidos+",IDDepartamento="+idDepartamento+",FechaNacimientoPersona="+fechaNacimiento+","+
-                    "TelefonoPersona="+telefono+",Direccion="+direccion+" Where IdPersona="+idPersona;
+                comando.CommandText = "UPDATE PD_Personas SET NombrePersona =" + nombre + ",ApellidosPersona=" + apellidos + ",IDDepartamento=" + idDepartamento + ",FechaNacimientoPersona=" + fechaNacimiento + "," +
+                    "TelefonoPersona=" + telefono + ",FotoPersona=" + foto + ",Direccion=" + direccion + " Where IdPersona=" + idPersona;
 
                 filas = comando.ExecuteNonQuery();
             }
-            catch (SqlException e) {
+            catch (SqlException e)
+            {
                 throw e;
             }
-            finally {
+            finally
+            {
                 miConexion.closeConnection(ref conexion);
             }
             return filas;
@@ -217,6 +236,7 @@ namespace _14_CRUD_PersonasUWP_DAL
                     objPersona.fechaNacimiento = miLector["FechaNacimientoPersona"].GetType() != tipoDBNULL ? (DateTime)miLector["FechaNacimientoPersona"] : new DateTime();
                     objPersona.direccion = miLector["Direccion"].GetType() != tipoDBNULL ? (string)miLector["Direccion"] : null;
                     objPersona.telefono = miLector["TelefonoPersona"].GetType() != tipoDBNULL ? (string)miLector["TelefonoPersona"] : null;
+                    objPersona.foto = miLector["FotoPersona"].GetType() != tipoDBNULL ? (byte[])miLector["FotoPersona"] : null;
                     objPersona.idDepartamento = miLector["IDDepartamento"].GetType() != tipoDBNULL ? (int)miLector["IDDepartamento"] : 0;
                 }
 

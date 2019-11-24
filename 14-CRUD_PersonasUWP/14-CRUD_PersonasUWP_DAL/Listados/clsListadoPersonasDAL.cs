@@ -36,6 +36,7 @@ namespace _14_CRUD_PersonasUWP_DAL
                         objPersona.fechaNacimiento = miLector["FechaNacimientoPersona"].GetType() != tipoDBNULL ? (DateTime)miLector["FechaNacimientoPersona"] : new DateTime();
                         objPersona.direccion = miLector["Direccion"].GetType() != tipoDBNULL ? (string)miLector["Direccion"] : null;
                         objPersona.telefono = miLector["TelefonoPersona"].GetType() != tipoDBNULL ? (string)miLector["TelefonoPersona"] : null;
+                        objPersona.foto = miLector["FotoPersona"].GetType() != tipoDBNULL ? (byte[])miLector["FotoPersona"] : null;
                         objPersona.idDepartamento = miLector["IDDepartamento"].GetType() != tipoDBNULL ? (int)miLector["IDDepartamento"] : 0;
                         listadoPersonas.Add(objPersona);
                     }
