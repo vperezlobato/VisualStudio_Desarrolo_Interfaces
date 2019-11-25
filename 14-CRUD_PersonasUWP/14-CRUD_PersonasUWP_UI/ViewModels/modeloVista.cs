@@ -55,6 +55,7 @@ namespace _14_CRUD_PersonasUWP_UI
                     _personaSeleccionada = value;
                     _EliminarCommand.RaiseCanExecuteChanged();
                     _GuardarCommand.RaiseCanExecuteChanged();
+                    _BuscarCommand.RaiseCanExecuteChanged();
                     if (personaSeleccionada != null)
                     {
                         convertirBitmap();
@@ -328,7 +329,7 @@ namespace _14_CRUD_PersonasUWP_UI
         
         private void BuscarCommand_Executed()
         {
-            filtrar(); 
+            filtrar();
         }
 
         private bool BuscarCommand_CanExecuted() {
