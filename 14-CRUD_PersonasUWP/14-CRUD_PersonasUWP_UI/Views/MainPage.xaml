@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:_14_CRUD_PersonasUWP_UI"
     xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
-    xmlns:miConversor="using:_14_CRUD_PersonasUWP_UI.ViewModels.Utils"
+    xmlns:miConversor1="using:_14_CRUD_PersonasUWP_UI.ViewModels.Utiles"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
  
@@ -16,8 +16,12 @@
         <models:modeloVista></models:modeloVista>
     </Page.DataContext>
 
+    <!---><Page.Resources>
+        <miConversor1:clsConversorFechaTextBox x:Key="ConversorFechaTextBox"/>
+    </Page.Resources><-->
+
     <Page.Resources>
-        <miConversor:clsConversorFechaDatePicker x:Key="conversorFechaDatePicker"/>
+            <miConversor1:clsConversorFechaDatePicker x:Key="ConversorFechaDatePicker"/>
     </Page.Resources>
 
     <RelativePanel>
@@ -95,7 +99,8 @@
             <!--Columna 2 -->
             <TextBox Name="txtboxNombre" MaxLength="20" Margin="10" Text="{Binding Path=personaSeleccionada.nombre,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1"></TextBox>
             <TextBox Name="txtboxApellidos" MaxLength="30" Margin="10" Text="{Binding Path=personaSeleccionada.apellidos,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2"></TextBox>
-            <DatePicker  Margin="10" Grid.Row="3" Grid.Column="1" Date="{Binding Path=personaSeleccionada.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource conversorFechaDatePicker}}"/>
+            <DatePicker  Margin="10" Grid.Row="3" Grid.Column="1" Date="{Binding Path=personaSeleccionada.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConversorFechaDatePicker}}"/>
+            <!---><TextBox Margin="10" Grid.Row="3" Grid.Column="1" Text="{Binding Path=personaSeleccionada.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConversorFechaTextBox}}"></TextBox><-->
             <TextBox Name="txtboxTelefono" MaxLength="15" Margin="10" Text="{Binding Path=personaSeleccionada.telefono,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"></TextBox>
             <TextBox Name="txtboxDireccion" MaxLength="30" MinHeight="80" MaxHeight="150" Margin="5,10,10,0" Text="{Binding Path=personaSeleccionada.direccion,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
             <ComboBox PlaceholderText="Selecciona un departamento" MinWidth="220" HorizontalAlignment="Center" Margin="10" Name="cbxNombreDepartamento" Grid.Row="7" Grid.Column="1" ItemsSource="{Binding listadoDepartamentos}" DisplayMemberPath="nombre" SelectedValuePath="id" SelectedValue="{Binding personaSeleccionada.idDepartamento, Mode=TwoWay}"/>

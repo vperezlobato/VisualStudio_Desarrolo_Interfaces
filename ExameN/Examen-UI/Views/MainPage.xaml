@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="Examen_UI.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Examen_UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm ="using:Examen_UI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:clsMainPageVM></vm:clsMainPageVM>
+    </Page.DataContext>
+    
+    <RelativePanel>
+        <ListView Name="listviewSuperheroe" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
+                  ItemsSource="{Binding listadoSuperheroes,Mode=TwoWay}" SelectedItem="{Binding superheroeSeleccionado,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Image Name="txtbNombre" Source="{Binding Path=imagen}" Width="200" Height="200"></Image>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Name="listviewMisiones" RelativePanel.RightOf="listviewSuperheroe" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
+                  ItemsSource="{Binding listadoMisionesNoReservadas,Mode=TwoWay}" SelectedItem="{Binding misionSeleccionada,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Name="txtbNombre" Foreground="Black" Text="{Binding Path=tituloMision}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Visibility="{Binding visible}" RelativePanel.RightOf="listviewMisiones" Name="txtbDescripcion" Margin="5" Text="Descripcion:"></TextBlock>
+        <TextBlock Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtbDescripcion" RelativePanel.Below="txtbDescripcion" Name="txtboxDescripcion" Margin="5,10,10,0" Text="{Binding Path=misionSeleccionada.descripcionMision,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+        <TextBlock Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtboxDescripcion" RelativePanel.Below="txtboxDescripcion" Name="txtbObservaciones" Margin="5"  Text="Observaciones:"></TextBlock>
+        <TextBox Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtboxDescripcion" RelativePanel.Below="txtbObservaciones" Name="txtboxObservaciones" MaxLength="30" MinHeight="80" MaxHeight="150" Margin="5,10,10,0" Text="{Binding Path=misionSeleccionada.observaciones, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <AppBarButton Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtboxDescripcion" Label="" Icon="Save" Command="{Binding reservarMision}" RelativePanel.Below="txtboxObservaciones"></AppBarButton>
+
+    </RelativePanel>
+</Page>
