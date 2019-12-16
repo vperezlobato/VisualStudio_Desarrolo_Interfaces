@@ -14,14 +14,14 @@
     </Page.DataContext>
     
     <RelativePanel>
-        <ListView Name="listviewSuperheroe" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
+        <FlipView Width="200" Height="200" Name="listviewSuperheroe" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" 
                   ItemsSource="{Binding listadoSuperheroes,Mode=TwoWay}" SelectedItem="{Binding superheroeSeleccionado,Mode=TwoWay}">
-            <ListView.ItemTemplate>
+            <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <Image Name="txtbNombre" Source="{Binding Path=imagen}" Width="200" Height="200"></Image>
+                    <Image Name="txtbNombre" Source="{Binding Path=imagen}"></Image>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </FlipView.ItemTemplate>
+        </FlipView>
 
         <ListView Name="listviewMisiones" RelativePanel.RightOf="listviewSuperheroe" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
                   ItemsSource="{Binding listadoMisionesNoReservadas,Mode=TwoWay}" SelectedItem="{Binding misionSeleccionada,Mode=TwoWay}">
@@ -33,7 +33,7 @@
         </ListView>
 
         <TextBlock Visibility="{Binding visible}" RelativePanel.RightOf="listviewMisiones" Name="txtbDescripcion" Margin="5" Text="Descripcion:"></TextBlock>
-        <TextBlock Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtbDescripcion" RelativePanel.Below="txtbDescripcion" Name="txtboxDescripcion" Margin="5,10,10,0" Text="{Binding Path=misionSeleccionada.descripcionMision,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtbDescripcion" RelativePanel.Below="txtbDescripcion" Name="txtboxDescripcion" Margin="5,10,10,0" Text="{Binding Path=misionSeleccionada.descripcionMision,Mode=OneWay}"></TextBlock>
 
         <TextBlock Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtboxDescripcion" RelativePanel.Below="txtboxDescripcion" Name="txtbObservaciones" Margin="5"  Text="Observaciones:"></TextBlock>
         <TextBox Visibility="{Binding visible}" RelativePanel.AlignLeftWith="txtboxDescripcion" RelativePanel.Below="txtbObservaciones" Name="txtboxObservaciones" MaxLength="30" MinHeight="80" MaxHeight="150" Margin="5,10,10,0" Text="{Binding Path=misionSeleccionada.observaciones, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
