@@ -15,7 +15,7 @@ namespace PongSignalR
 
         public bool seHaMovido { get; set; }
 
-        public string 
+        public string ultimoActualizado { get; set; }
 
     }
 }

@@ -80,19 +80,21 @@ namespace PongSignalR
         public void golpeoJugador1()
         {
             if (_ultimaColision == enumColision.jugador1)
-            {
+                return;
+
                 manejarColisionMuroVertical();
                 _ultimaColision = enumColision.jugador1;
-            }
+            
         }
 
         public void golpeoJugador2()
         {
             if (_ultimaColision == enumColision.jugador2)
-            {
+                return;
+
                 manejarColisionMuroVertical();
                 _ultimaColision = enumColision.jugador2;
-            }
+            
         }
     }
 }
