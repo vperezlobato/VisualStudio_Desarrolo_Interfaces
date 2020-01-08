@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <RelativePanel>
-        <StackPanel Name="stkJugador1" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="20" Height="100" Background="Black"></StackPanel>
+        <StackPanel KeyUp="CoreWindow_KeyUp" KeyDown="CoreWindow_KeyDown" Name="stkJugador1" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="20" Height="100" Background="Black"></StackPanel>
         <StackPanel Name="stkPelota" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="30" Height="30" Background="Black"></StackPanel>
         <StackPanel Name="stkJugador2" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="20" Height="100" Background="Black"></StackPanel>
     </RelativePanel>

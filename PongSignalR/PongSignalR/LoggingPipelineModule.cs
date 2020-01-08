@@ -9,7 +9,7 @@ namespace PongSignalR
 {
     public class LoggingPipelineModule : HubPipelineModule
     {
-        // We trace any unhandled error here. Don't forget to register this class to the pipeline.
+        //Trazamos cualquier error no manejado aquí. No olvide registrar esta clase en la tubería.
         protected override void OnIncomingError(ExceptionContext exceptionContext, IHubIncomingInvokerContext invokerContext)
         {
             Trace.TraceError("=> Exception " + exceptionContext.Error.Message);

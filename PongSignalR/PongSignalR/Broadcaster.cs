@@ -15,18 +15,16 @@ namespace PongSignalR
 
         public Broadcaster()
         {
-            // Save our hub context so we can easily use it 
-            // to send to its connected clients
+            // Guardar el contexto de nuestro hub para poder usarlo facilmente para enviar la informacion a los clientes conectados
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<PongHub>();
         }
 
         public void Broadcast(IEnumerable<ObjetoJuego> objetosJuegoMovidos)
         {
-            // Tell the clients the new position of moved objects
+            // Avisa al cliente de la nueva posicion de los objetos
             foreach (var objetoJuego in objetosJuegoMovidos)
             {
-                // This is how we can access the Clients property 
-                // in a static hub method or outside of the hub entirely. Use AllExcept for a performance tweak
+
                 _hubContext.Clients.AllExcept(objetoJuego.ultimoActualizado).updateGameObjectPosition(objetoJuego);
 
                 objetoJuego.seHaMovido = false;
@@ -35,7 +33,7 @@ namespace PongSignalR
 
         public void Broadcast(IEnumerable<ObjetoJuego> objetosJuego, string connectionId)
         {
-            // Signal only the client with connectionId
+            //Avisa solo el cliente de connectionId
 
             foreach (var objetoJuego in objetosJuego)
                 _hubContext.Clients.Client(connectionId).actualizarPosicionObjeto(objetoJuego);

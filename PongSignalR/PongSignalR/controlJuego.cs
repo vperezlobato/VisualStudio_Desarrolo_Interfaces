@@ -13,7 +13,7 @@ namespace PongSignalR
 
         private movimientosPelota _movimientoPelota;
         private Broadcaster _broadcaster;
-        private List<ObjetoJuego> __objetosJuego;
+        private List<ObjetoJuego> _objetosJuego;
         private Timer _broadcastLoop;
 
         public string jugador1ConnectionId { get; set; }
@@ -31,24 +31,24 @@ namespace PongSignalR
         {
             BroadcastInterval = TimeSpan.FromMilliseconds(40);
 
-            __objetosJuego = new List<ObjetoJuego>();
+            _objetosJuego = new List<ObjetoJuego>();
             _broadcaster = new Broadcaster();
         }
 
         public void añadirObjetoJuego(string id)
         {
-            if (!__objetosJuego.Any(g => g.id == id))
+            if (!_objetosJuego.Any(g => g.id == id))
             {
                 var objetoJuego = new ObjetoJuego { id = id };
-                __objetosJuego.Add(objetoJuego);
+                _objetosJuego.Add(objetoJuego);
 
                 if (id == "pelota")
                     _movimientoPelota = new movimientosPelota(objetoJuego);
 
 
-                if (__objetosJuego.Count == 3)
+                if (_objetosJuego.Count == 3)
                 {
-                    // Now that we got both players and the ball, start the broadcast loop, and update all the GameObjects that moved
+                    //Ya tenemos los dos jugadores y la pelota, ahora iniciamos el ciclo de transmisión y actuliza todos los objetos que se movieron
                     _broadcastLoop = new Timer( actualizar,null,BroadcastInterval,BroadcastInterval);
                 }
             }
@@ -66,7 +66,7 @@ namespace PongSignalR
 
         public void actualizarPosicionObjeto(ObjetoJuego modeloCliente)
         {
-            var objetoJuego = __objetosJuego.FirstOrDefault(g => g.id == modeloCliente.id);
+            var objetoJuego = _objetosJuego.FirstOrDefault(g => g.id == modeloCliente.id);
 
             if (objetoJuego != null)
             {
@@ -79,14 +79,14 @@ namespace PongSignalR
 
         public void actualizarPosicionObjetoParaCliente(string connectionId)
         {
-            _broadcaster.Broadcast(__objetosJuego.Where(g => g.ultimoActualizado != null), connectionId);
+            _broadcaster.Broadcast(_objetosJuego.Where(g => g.ultimoActualizado != null), connectionId);
         }
 
         private void actualizar(object State)
         {
             _movimientoPelota.actualizar();
 
-            _broadcaster.Broadcast(__objetosJuego.Where(g => g.seHaMovido));
+            _broadcaster.Broadcast(_objetosJuego.Where(g => g.seHaMovido));
         }
     }
 }

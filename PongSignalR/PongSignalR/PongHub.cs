@@ -73,7 +73,7 @@ namespace PongSignalR
             return base.OnConnected();
         }
 
-        public override Task OnDisconnected(bool stopCalled)
+        public override Task OnDisconnected(bool pararLlamado)
         {
 
             if (_controlJuego.jugador1ConnectionId == Context.ConnectionId)
@@ -85,7 +85,7 @@ namespace PongSignalR
                 _controlJuego.jugador2ConnectionId = null;
             }
 
-            return base.OnDisconnected(stopCalled);
+            return base.OnDisconnected(pararLlamado);
         }
     }
 }
