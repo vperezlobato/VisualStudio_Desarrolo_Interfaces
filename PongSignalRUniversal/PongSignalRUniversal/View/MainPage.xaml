@@ -6,12 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:vm="using:PongSignalRUniversal.Model"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.DataContext>
+        <vm:MainPageVM></vm:MainPageVM>
+    </Page.DataContext>
+    
     <RelativePanel>
-        <StackPanel KeyUp="CoreWindow_KeyUp" KeyDown="CoreWindow_KeyDown" Name="stkJugador1" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="20" Height="100" Background="Black"></StackPanel>
+        <StackPanel Canvas.Top="{Binding jugador1.posicionX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="stkJugador1"  Width="20" Height="100" Background="Black"></StackPanel>
         <StackPanel Name="stkPelota" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="30" Height="30" Background="Black"></StackPanel>
         <StackPanel Name="stkJugador2" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"  Width="20" Height="100" Background="Black"></StackPanel>
+        <StackPanel x:Name="btnArriba" PointerPressed="{x:Bind vMGame.btnPointerPressed}" PointerExited="{x:Bind vMGame.btnPointerExited}"></StackPanel>
+        <StackPanel x:Name="btnAbajo" PointerPressed="{x:Bind vMGame.btnPointerPressed}" PointerExited="{x:Bind vMGame.btnPointerExited}"></StackPanel>
     </RelativePanel>
             
 </Page>

@@ -15,13 +15,17 @@ namespace PongSignalRUniversal.Entidades
         public string ultimoActualizado { get; set; }
         public bool seHaMovido { get; set; }
 
-        public objetoJuego(double izquierda, double top, string id, string ultimoActualizado, bool seHaMovido) {
+        public int velocidad { get; set; }
+        public int posicionX { get; set; }
+
+        public objetoJuego(double izquierda, double top, string id, string ultimoActualizado, bool seHaMovido, int velocidad, int posicionX) {
             this.izquierda = izquierda;
             this.top = top;
             this.id = id;
             this.ultimoActualizado = ultimoActualizado;
             this.seHaMovido = seHaMovido;
-
+            this.velocidad = velocidad;
+            this.posicionX = posicionX;
         }
     }
 }
