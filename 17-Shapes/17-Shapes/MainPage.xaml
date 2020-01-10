@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="_17_Shapes.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_17_Shapes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Canvas>
+        <Polygon Stroke="Red" StrokeThickness="5" Points="80,50 100,130 60,130" />
+        <Polygon Stroke="Red" StrokeThickness="5" Points="100,150 140,150,170 170,140 180,100 180"/>
+        <Polygon Stroke="Red" StrokeThickness="5" Points="120,250 160,250 200,200 240,250 280,250 240,280 260,330 200,300 150,330 160,280"/>
+    </Canvas>
+</Page>
