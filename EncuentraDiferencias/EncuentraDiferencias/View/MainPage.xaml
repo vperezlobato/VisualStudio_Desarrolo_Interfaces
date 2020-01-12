@@ -15,26 +15,12 @@
 
     <RelativePanel>
         <TextBlock Name="txtblock" FontSize="30" RelativePanel.AlignHorizontalCenterWithPanel="True">Aciertos:</TextBlock>
-        <TextBlock Name="txtblockNumAciertos" FontSize="30" RelativePanel.RightOf="txtblock" Text="{Binding numAciertos,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-        <Canvas Grid.Column="0" Grid.Row="0" RelativePanel.Below="txtblock" x:Name="canvas">
-                <Image Canvas.Left="150" Canvas.Top="80" Source="{Binding imagen1.imagen}" Height="800">
+        <TextBlock Name="txtblockNumAciertos" FontSize="30" RelativePanel.RightOf="txtblock" Text="{Binding numAciertos,Mode=TwoWay}"></TextBlock>
 
-                </Image>
-            </Canvas>
-        <Canvas Grid.Column="1" Grid.Row="0" x:Name="canvas2" RelativePanel.Below="txtblock">
-            <Image Canvas.Left="850" Canvas.Top="80" Source="{Binding imagen2.imagen}" Height="800">
-
-            </Image>
+        <Canvas RelativePanel.Below="txtblock" x:Name="canvas">
+            <Image Canvas.Left="150" Canvas.Top="80" Source="{Binding imagen1}" Height="800"></Image>
+            <Image Canvas.Left="850" Canvas.Top="80" Source="{Binding imagen2}" Height="800"></Image>
         </Canvas>
-        </Grid>
     </RelativePanel>
 
 

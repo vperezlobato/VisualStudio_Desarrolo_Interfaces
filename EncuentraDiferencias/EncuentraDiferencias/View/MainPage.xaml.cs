@@ -30,9 +30,9 @@ namespace EncuentraDiferencias
         {
             this.MainPageVm = new MainPageVM();
             this.InitializeComponent();
-            for (int i = 0; i < MainPageVm.imagen2.diferencias.Count; i++) {
-                MainPageVm.imagen2.diferencias.ElementAt(i).ellipse.Tapped += new TappedEventHandler(MainPageVm.evento_Click);
-                canvas.Children.Add(MainPageVm.imagen2.diferencias.ElementAt(i).ellipse);
+            for (int i = 0; i < MainPageVm.diferencias.Count; i++) {
+                MainPageVm.diferencias.ElementAt(i).ellipse.Tapped += new TappedEventHandler(MainPageVm.evento_Click);
+                canvas.Children.Add(MainPageVm.diferencias.ElementAt(i).ellipse);
             }
         }
     }

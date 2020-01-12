@@ -15,7 +15,7 @@ namespace EncuentraDiferencias.Models
         public int size { get; }
         public Ellipse ellipse { get; set; }
         public int posY { get; set; }
-        public int posX{ get; set; }
+        public int posX { get; set; }
         public bool encontrada { get; set; }
 
         public Diferencia()
@@ -28,8 +28,9 @@ namespace EncuentraDiferencias.Models
             ellipse.Height = size;
             ellipse.Fill = new SolidColorBrush(Colors.Transparent);
             ellipse.StrokeThickness = 5;
-            ellipse.Stroke = new SolidColorBrush(Colors.Red);
+            ellipse.Stroke = new SolidColorBrush(Colors.Transparent);
             encontrada = false;
+            
         }
 
         public void tomarPosicion() {
