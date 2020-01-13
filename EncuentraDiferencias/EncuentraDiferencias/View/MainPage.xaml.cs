@@ -20,18 +20,16 @@ using Windows.UI.Xaml.Shapes;
 
 namespace EncuentraDiferencias
 {
-    /// <summary>
-    /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPageVM MainPageVm { get; }
         public MainPage()
         {
-            this.MainPageVm = new MainPageVM();
+            
             this.InitializeComponent();
+            this.MainPageVm = (MainPageVM)this.DataContext;
+
             for (int i = 0; i < MainPageVm.diferencias.Count; i++) {
-                MainPageVm.diferencias.ElementAt(i).ellipse.Tapped += new TappedEventHandler(MainPageVm.evento_Click);
                 canvas.Children.Add(MainPageVm.diferencias.ElementAt(i).ellipse);
             }
         }

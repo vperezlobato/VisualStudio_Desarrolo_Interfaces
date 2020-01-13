@@ -29,7 +29,7 @@ namespace PongSignalRUniversal.Model
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dispatcherTimer.Tick += timerTick;
 
-            _jugador1 = new objetoJuego(0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
+            _jugador1 = new objetoJuego(0.0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
             _jugador2 = new objetoJuego(880, "jugador2", "jugador2", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
             _pelota = new objetoJuego(250, "pelota", "pelota", false, 100, 500, null);
             //proxy.Invoke("añadirObjetoJuego",_pelota.id);
@@ -40,9 +40,10 @@ namespace PongSignalRUniversal.Model
 
         public objetoJuego jugador1 {
             get { return _jugador1; }
-            set { _jugador1 = value;
-                NotifyPropertyChanged("jugador1");
-            } }
+            set {
+                _jugador1 = value;
+            }
+        }
 
         private void timerTick(object sender, object e)
         {
@@ -50,7 +51,7 @@ namespace PongSignalRUniversal.Model
         }
 
         /// <summary>
-        /// Evento que se da al pulsar una tecla, en este caso, A y D para mover la nave
+        /// Evento que se da al pulsar una tecla, en este caso, W y S para mover la barra
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -58,19 +59,19 @@ namespace PongSignalRUniversal.Model
         {
             if (e.Key == VirtualKey.W)
             {
-                left();
+                arriba();
                 dispatcherTimer.Start();
             }
 
             if (e.Key == VirtualKey.S)
             {
-                right();
+                abajo();
                 dispatcherTimer.Start();
             }
 
         }
         /// <summary>
-        /// Evento que se da al levantar una tecla, en este caso, A o D para parar la nave
+        /// Evento que se da al levantar una tecla, en este caso, W o S para parar el movimiento de la barra
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -82,7 +83,7 @@ namespace PongSignalRUniversal.Model
             }
         }
         /// <summary>
-        /// Método que se encarga de mover la nave y controlar que no se salga del canvas
+        /// Método que se encarga de mover la barra y controlar que no se salga del canvas
         /// </summary>
         public void move()
         {
@@ -95,9 +96,9 @@ namespace PongSignalRUniversal.Model
         }
 
         /// <summary>
-        /// Método que se encarga de mover la nave a la derecha
+        /// Método que se encarga de mover la barra hacia abajo
         /// </summary>
-        public void right()
+        public void abajo()
         {
             //_velocidad = 10;
             if (_jugador1.posicionY < 1000)
@@ -110,9 +111,9 @@ namespace PongSignalRUniversal.Model
             }
         }
         /// <summary>
-        /// Método que se encarga de mover la nave a la izquierda
+        /// Método que se encarga de mover la barra hacia arriba
         /// </summary>
-        public void left()
+        public void arriba()
         {
             //_velocidad = -10;
             if (_jugador1.posicionY > 0 && _jugador1.posicionY - 10 > 0)
@@ -122,40 +123,6 @@ namespace PongSignalRUniversal.Model
             else
             {
                 _jugador1.velocidad = 0;
-            }
-        }
-
-        /// <summary>
-        /// KeyDown en botones
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void btnPointerPressed(object sender, PointerRoutedEventArgs e)//
-        {
-            StackPanel stkpanel = (StackPanel)sender;
-            if (stkpanel.Name.Equals("btnArriba"))//Comprobar qué boton es el que llega
-            {
-                left();
-                dispatcherTimer.Start();
-            }
-
-            if (stkpanel.Name.Equals("btnAbajo"))
-            {
-                right();
-                dispatcherTimer.Start();
-            }
-        }
-        /// <summary>
-        /// KeyUp en botones
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void btnPointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            StackPanel stkpanel = (StackPanel)sender;
-            if (stkpanel.Name.Equals("btnArriba") || stkpanel.Name.Equals("btnAbajo"))//Comprobar qué boton es el que llega
-            {
-                dispatcherTimer.Stop();
             }
         }
 
