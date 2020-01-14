@@ -20,28 +20,54 @@ namespace PongSignalRUniversal.Model
         private objetoJuego _jugador2;
         private objetoJuego _pelota;
         private DispatcherTimer dispatcherTimer { get; set; }
+        private enumColision _colision;
 
         public MainPageVM(){
-            //conn = new HubConnection("https://pongsignalr.azurewebsites.net/");
-            //proxy = conn.CreateHubProxy("PongHub");
-            //conn.Start();
+            conn = new HubConnection("http://localhost:54209/");
+            proxy = conn.CreateHubProxy("PongHub");
+            conn.Start();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dispatcherTimer.Tick += timerTick;
 
-            _jugador1 = new objetoJuego(0.0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
-            _jugador2 = new objetoJuego(880, "jugador2", "jugador2", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
-            _pelota = new objetoJuego(250, "pelota", "pelota", false, 100, 500, null);
-            //proxy.Invoke("añadirObjetoJuego",_pelota.id);
-            //proxy.Invoke("añadirObjetoJuego",_jugador1.id);
-            //proxy.Invoke("añadirObjetoJuego",_jugador2.id);
+            do {
+                _jugador1 = new objetoJuego(0.0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
+                _jugador2 = new objetoJuego(880, "jugador2", "jugador2", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
+                _pelota = new objetoJuego(250, "pelota", "pelota", false, 100, 500, null);
+                if (conn.State == ConnectionState.Connected)
+                {
+                    proxy.Invoke("añadirObjetoJuego", _pelota.id);
+                    proxy.Invoke("añadirObjetoJuego", _jugador1.id);
+                    proxy.Invoke("añadirObjetoJuego", _jugador2.id);
+                }
+
+            }while(conn.State != ConnectionState.Connected);
+
             getCliente();
-        }
+         }
 
         public objetoJuego jugador1 {
             get { return _jugador1; }
             set {
                 _jugador1 = value;
+            }
+        }
+
+        public objetoJuego jugador2
+        {
+            get { return _jugador2; }
+            set
+            {
+                _jugador2 = value;
+            }
+        }
+
+        public enumColision colision {
+            get {
+                return _colision;
+            }
+            set {
+                _colision = value;
             }
         }
 
@@ -87,12 +113,27 @@ namespace PongSignalRUniversal.Model
         /// </summary>
         public void move()
         {
-            Double posicionFutura = _jugador1.posicionY + _jugador1.velocidad;
-            if (posicionFutura > 0 && posicionFutura < 1000)
+            Double posicionFutura;
+            if (_colision == enumColision.jugador1)
             {
-                _jugador1.posicionY += _jugador1.velocidad;
+                posicionFutura = _jugador1.posicionY + _jugador1.velocidad;
+                if (posicionFutura > 0 && posicionFutura < 1000)
+                {
+                    _jugador1.posicionY += _jugador1.velocidad;
+                }
+                NotifyPropertyChanged("jugador1");
             }
-            NotifyPropertyChanged("jugador1");
+            else {
+                if (_colision == enumColision.jugador2)
+                {
+                    posicionFutura = _jugador2.posicionY + _jugador2.velocidad;
+                    if (posicionFutura > 0 && posicionFutura < 1000)
+                    {
+                        _jugador2.posicionY += _jugador2.velocidad;
+                    }
+                    NotifyPropertyChanged("jugador2");
+                }
+            }
         }
 
         /// <summary>
@@ -101,13 +142,24 @@ namespace PongSignalRUniversal.Model
         public void abajo()
         {
             //_velocidad = 10;
-            if (_jugador1.posicionY < 1000)
+            if (_colision == enumColision.jugador1)
             {
-                _jugador1.velocidad = 10;
-            }
-            else
-            {
-                _jugador1.velocidad = 0;
+                if (_jugador1.posicionY < 1000)
+                {
+                    _jugador1.velocidad = 10;
+                }else{
+                    _jugador1.velocidad = 0;
+                }
+            }else {
+                if (_colision == enumColision.jugador2)
+                {
+                    if (_jugador2.posicionY < 1000)
+                    {
+                        _jugador2.velocidad = 10;
+                    }else{
+                        _jugador2.velocidad = 0;
+                    }
+                }
             }
         }
         /// <summary>
@@ -116,19 +168,30 @@ namespace PongSignalRUniversal.Model
         public void arriba()
         {
             //_velocidad = -10;
-            if (_jugador1.posicionY > 0 && _jugador1.posicionY - 10 > 0)
+            if (_colision == enumColision.jugador1)
             {
-                _jugador1.velocidad = -10;
-            }
-            else
+                if (_jugador1.posicionY > 0 && _jugador1.posicionY - 10 > 0)
+                {
+                    _jugador1.velocidad = -10;
+                }else{
+                    _jugador1.velocidad = 0;
+                }
+            }else
             {
-                _jugador1.velocidad = 0;
+                if (_colision == enumColision.jugador2)
+                {
+                    if (_jugador2.posicionY > 0 && _jugador2.posicionY - 10 > 0)
+                    {
+                        _jugador2.velocidad = -10;
+                    }else{
+                        _jugador2.velocidad = 0;
+                    }
+                }
             }
         }
 
         public async void getCliente() {
-          //enumColision colision = await proxy.Invoke<enumColision>("getCliente");
-
+            _colision = await proxy.Invoke<enumColision>("getCliente");
         }
     }
 }

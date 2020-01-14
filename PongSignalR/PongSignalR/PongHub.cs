@@ -12,7 +12,6 @@ namespace PongSignalR
     {
         private controlJuego _controlJuego;
 
-        // creado para cliente conectado (es por esto que controlJuego tiene que ser un singleton)
         public PongHub() : this(controlJuego.Instance)
         {
         }
@@ -39,11 +38,14 @@ namespace PongSignalR
             enumColision tipoCliente = enumColision.defaultt;
 
             if (_controlJuego.jugador1ConnectionId == Context.ConnectionId)
+            {
                 tipoCliente = enumColision.jugador1;
+            }
 
             if (_controlJuego.jugador2ConnectionId == Context.ConnectionId)
+            {
                 tipoCliente = enumColision.jugador2;
-
+            }
             return tipoCliente;
         }
 

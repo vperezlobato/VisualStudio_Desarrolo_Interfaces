@@ -38,9 +38,5 @@ namespace PongSignalRUniversal
             Window.Current.Content.KeyUp += this.vMGame.Grid_KeyUp;
         }
 
-        private void Canvas_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            
-        }
     }
 }
