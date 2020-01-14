@@ -5,6 +5,7 @@ using System.Web;
 using System.Threading;
 
 namespace PongSignalR
+
 {
     public class controlJuego
     {

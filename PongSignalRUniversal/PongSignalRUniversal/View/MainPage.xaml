@@ -12,13 +12,19 @@
     <Page.DataContext>
         <vm:MainPageVM></vm:MainPageVM>
     </Page.DataContext>
-    
-    <RelativePanel>
+
+    <RelativePanel Loaded="allowfocus_Loaded">
         <Canvas x:Name="canvas" MaxHeight="1000" MaxWidth="1500">
-            <Image Canvas.Left="{Binding jugador1.izquierda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="{Binding jugador1.posicionY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="stkJugador1"  Width="20" Height="100" Source="{Binding jugador1.imagen}"></Image>
+            <Image Name="stkJugador1"  Width="20" Height="100" Source="{Binding jugador1.imagen}" 
+                   KeyDown="{x:Bind vMGame.Grid_KeyDown,Mode=OneWay}" KeyUp="{x:Bind vMGame.Grid_KeyUp}" 
+                   Canvas.Left="{Binding jugador1.izquierda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                   Canvas.Top="{Binding jugador1.posicionY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></Image>
+            
+            <Image Name="stkJugador2"  Width="20" Height="100" Source="{Binding jugador2.imagen}" 
+                   KeyDown="{x:Bind vMGame.Grid_KeyDown,Mode=OneWay}" KeyUp="{x:Bind vMGame.Grid_KeyUp}" 
+                   Canvas.Left="{Binding jugador2.izquierda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                   Canvas.Top="{Binding jugador2.posicionY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></Image>
         </Canvas>
-        <StackPanel x:Name="btnArriba" PointerPressed="{x:Bind vMGame.btnPointerPressed}" PointerExited="{x:Bind vMGame.btnPointerExited}"></StackPanel>
-        <StackPanel x:Name="btnAbajo" PointerPressed="{x:Bind vMGame.btnPointerPressed}" PointerExited="{x:Bind vMGame.btnPointerExited}"></StackPanel>
-    </RelativePanel>
+        </RelativePanel>
             
 </Page>

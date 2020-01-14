@@ -15,11 +15,11 @@
 
     <RelativePanel>
         <TextBlock Name="txtblock" FontSize="30" RelativePanel.AlignHorizontalCenterWithPanel="True">Aciertos:</TextBlock>
-        <TextBlock Name="txtblockNumAciertos" FontSize="30" RelativePanel.RightOf="txtblock" Text="{Binding numAciertos,Mode=TwoWay}"></TextBlock>
+        <TextBlock Name="txtblockNumAciertos" FontSize="30" RelativePanel.RightOf="txtblock" Text="{Binding numAciertos,Mode=OneWay}"></TextBlock>
 
         <Canvas RelativePanel.Below="txtblock" x:Name="canvas">
-            <Image Canvas.Left="150" Canvas.Top="80" Source="{Binding imagen1}" Height="800"></Image>
-            <Image Canvas.Left="850" Canvas.Top="80" Source="{Binding imagen2}" Height="800"></Image>
+            <Image Canvas.Left="150" Canvas.Top="0" Source="{Binding imagen1}" Height="600"></Image>
+            <Image Canvas.Left="800" Canvas.Top="0" Source="{Binding imagen2}" Height="600"></Image>
         </Canvas>
     </RelativePanel>
 

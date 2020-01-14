@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,6 +32,11 @@ namespace PongSignalRUniversal
             vMGame = (MainPageVM)this.DataContext;
         }
 
+        private void allowfocus_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.Current.Content.KeyDown += this.vMGame.Grid_KeyDown;
+            Window.Current.Content.KeyUp += this.vMGame.Grid_KeyUp;
+        }
 
     }
 }

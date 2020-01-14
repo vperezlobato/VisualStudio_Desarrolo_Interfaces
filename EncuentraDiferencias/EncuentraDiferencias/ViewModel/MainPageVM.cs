@@ -1,10 +1,12 @@
 ﻿using EncuentraDiferencias.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
@@ -20,8 +22,7 @@ namespace EncuentraDiferencias.ViewModel
         private List<Diferencia> _diferencias;
         public MainPageVM()
         {            
-            rellenarPag();
-            
+            rellenarPag();            
         }
 
         public Uri imagen1
@@ -46,11 +47,8 @@ namespace EncuentraDiferencias.ViewModel
             get { return _numAciertos; }
             set
             {
-                if (_numAciertos != value)
-                {
-                    _numAciertos = value;
-                    NotifyPropertyChanged("numAciertos");
-                }
+                _numAciertos = value;
+               
             }
         }
 
@@ -78,13 +76,17 @@ namespace EncuentraDiferencias.ViewModel
             diferencia3.ellipse.Name = "elipse3";
             diferencia4.ellipse.Name = "elipse4";
             diferencia1.posX = 210;
-            diferencia2.posX = 470;
-            diferencia1.posY = 420;
-            diferencia2.posY = 465;
-            diferencia3.posX = 900;
-            diferencia4.posX = 1160;
-            diferencia3.posY = 420;
-            diferencia4.posY = 465;
+            diferencia2.posX = 380;
+            diferencia1.posY = 250;
+            diferencia2.posY = 280;
+            diferencia3.posX = 850;
+            diferencia4.posX = 1030;
+            diferencia3.posY = 250;
+            diferencia4.posY = 280;
+            diferencia1.ellipse.Tapped += new TappedEventHandler(evento_Click);
+            diferencia2.ellipse.Tapped += new TappedEventHandler(evento_Click);
+            diferencia3.ellipse.Tapped += new TappedEventHandler(evento_Click);
+            diferencia4.ellipse.Tapped += new TappedEventHandler(evento_Click);
             diferencia1.tomarPosicion();
             diferencia2.tomarPosicion();
             diferencia3.tomarPosicion();
@@ -99,7 +101,7 @@ namespace EncuentraDiferencias.ViewModel
 
         }
 
-        public void evento_Click(object sender, TappedRoutedEventArgs e)
+        public async void evento_Click(object sender, TappedRoutedEventArgs e)
         {
             Ellipse ellipse = (Ellipse)sender;
             string nombre = ellipse.Name;
@@ -115,6 +117,11 @@ namespace EncuentraDiferencias.ViewModel
                             diferencias.ElementAt(2).ellipse.Stroke = new SolidColorBrush(Colors.Red);
                             _numAciertos++;
                             NotifyPropertyChanged("numAciertos");
+                            if (_numAciertos == 2)
+                            {
+                                var dialog = new MessageDialog("Has ganado!!.");
+                                await dialog.ShowAsync();
+                            }
                         }
                     break;
                     case "elipse2":
@@ -126,10 +133,16 @@ namespace EncuentraDiferencias.ViewModel
                             diferencias.ElementAt(3).ellipse.Stroke = new SolidColorBrush(Colors.Red);
                             _numAciertos++;
                             NotifyPropertyChanged("numAciertos");
+                            if (_numAciertos == 2)
+                            {
+                                var dialog = new MessageDialog("Has ganado!!.");
+                                await dialog.ShowAsync();
+                            }
                         }
                         break;
                 }
             }
+            
             
         }
     }
