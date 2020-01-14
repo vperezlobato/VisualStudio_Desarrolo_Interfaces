@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="EjercicioAnimaciones.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EjercicioAnimaciones"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:EjercicioAnimaciones.ViewModel"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:MainPageVM></vm:MainPageVM>
+    </Page.DataContext>
+    
+    <Canvas x:Name="canvas" Background="Black" Loaded="allowfocus_Loaded" MaxHeight="1000" MaxWidth="1000">
+        <Canvas.Resources>
+            <Storyboard x:Name="moverEstrellas">
+
+                <DoubleAnimation x:Name="animacionEjeY" Storyboard.TargetName="TranslateTransform"
+                             Storyboard.TargetProperty="Y"
+                             Completed="AnimacionEjeY_Completed"
+                             Duration="0:0:2">
+                </DoubleAnimation>
+            </Storyboard>
+        </Canvas.Resources>
+        <Image Name="stkJugador1"  Width="200" Height="200" Source="ms-appx:///Assets/Spaceship-PNG-File.png" 
+                   KeyDown="{x:Bind vMGame.Grid_KeyDown,Mode=OneWay}" KeyUp="{x:Bind vMGame.Grid_KeyUp}" 
+                   Canvas.Left="{Binding nave.posX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                   Canvas.Top="{Binding nave.posY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></Image>
+
+        <Ellipse Width="15" Height="15" Fill="White" Stroke="Violet">
+            <Ellipse.RenderTransform >
+                <TranslateTransform x:Name="TranslateTransform" Y="50" ></TranslateTransform>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+
+    </Canvas>
+</Page>
