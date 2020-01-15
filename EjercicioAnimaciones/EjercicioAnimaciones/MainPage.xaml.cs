@@ -37,115 +37,32 @@ namespace EjercicioAnimaciones
             animacionEjeY.From = 10;
             moverEstrellas.Begin();
 
-            for (int i = 0; i < 20; i++) {
-                Ellipse ellipse = new Ellipse();
+            for (int i = 0; i < 100; i++) {
                 Random rnd = new Random();
-                if (i <= 5)
+                int aleatorio;
+                aleatorio = rnd.Next(3);
+                Ellipse ellipse = new Ellipse();
+                switch (aleatorio)
                 {
-                    ellipse.Height = 10;
-                    ellipse.Width = 10;
-                    Canvas.SetLeft(ellipse, rnd.Next(1000));
-                    Canvas.SetTop(ellipse, rnd.Next(1000));
-                    ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-                    ellipse.Fill = new SolidColorBrush(Colors.White);
-                    TranslateTransform translate = new TranslateTransform();
-                    translate.Y = 0;
-                    TransformGroup myTransformGroup = new TransformGroup();
-                    myTransformGroup.Children.Add(translate);
-                    ellipse.RenderTransform = myTransformGroup;
-
-                    ellipse.RenderTransform = new TranslateTransform();
-                    Storyboard storyboard = new Storyboard();
-
-                    DoubleAnimation translateYAnimation = new DoubleAnimation();
-                    translateYAnimation.From = 0;
-                    translateYAnimation.To = 1000;
-                    translateYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(13000));
-
-                    Storyboard.SetTarget(translateYAnimation, ellipse);
-                    Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
-
-                    storyboard.Children.Add(translateYAnimation);
-                    canvas.Children.Add(ellipse);
-                    translateYAnimation.Completed += animacionCompletada;                    
-                    storyboard.Begin();
+                    case 0:
+                        ellipse = crearEllipse();
+                        crearAnimacion(ellipse);
+                        break;
+                    case 1:
+                        ellipse = crearEllipse2();
+                        crearAnimacion2(ellipse);
+                        break;
+                    case 2:
+                        ellipse = crearEllipse3();
+                        crearAnimacion3(ellipse);
+                        break;
+                    case 3:
+                        ellipse = crearEllipse4();
+                        crearAnimacion4(ellipse);
+                        break;
                 }
-                else
-                    if (i <= 10)
-                {
-                    ellipse.Height = 20;
-                    ellipse.Width = 20;
-                    Canvas.SetLeft(ellipse, rnd.Next(1000));
-                    Canvas.SetTop(ellipse, rnd.Next(1000));
-                    ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-                    ellipse.Fill = new SolidColorBrush(Colors.White);
-                    TranslateTransform translate = new TranslateTransform();
-                    ellipse.RenderTransform = new TranslateTransform();
-                    Storyboard storyboard = new Storyboard();
 
-                    DoubleAnimation translateYAnimation = new DoubleAnimation();
-                    translateYAnimation.From = 0;
-                    translateYAnimation.To = 1000;
-                    translateYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(10000));
 
-                    Storyboard.SetTarget(translateYAnimation, ellipse);
-                    Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
-
-                    storyboard.Children.Add(translateYAnimation);
-                    canvas.Children.Add(ellipse);
-                    storyboard.Begin();
-                }
-                else
-                    if (i <= 15)
-                {
-                    ellipse.Height = 30;
-                    ellipse.Width = 30;
-                    Canvas.SetLeft(ellipse, rnd.Next(1000));
-                    Canvas.SetTop(ellipse, rnd.Next(1000));
-                    ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-                    ellipse.Fill = new SolidColorBrush(Colors.White);
-                    TranslateTransform translate = new TranslateTransform();
-                    ellipse.RenderTransform = new TranslateTransform();
-                    Storyboard storyboard = new Storyboard();
-
-                    DoubleAnimation translateYAnimation = new DoubleAnimation();
-                    translateYAnimation.From = 0;
-                    translateYAnimation.To = 1000;
-                    translateYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(7000));
-
-                    Storyboard.SetTarget(translateYAnimation, ellipse);
-                    Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
-
-                    storyboard.Children.Add(translateYAnimation);
-                    canvas.Children.Add(ellipse);
-                    storyboard.Begin();
-
-                }
-                else {
-                    ellipse.Height = 40;
-                    ellipse.Width = 40;
-                    Canvas.SetLeft(ellipse, rnd.Next(1000));
-                    Canvas.SetTop(ellipse, rnd.Next(1000));
-                    ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-                    ellipse.Fill = new SolidColorBrush(Colors.White);
-                    TranslateTransform translate = new TranslateTransform();
-                    ellipse.RenderTransform = new TranslateTransform();
-                    Storyboard storyboard = new Storyboard();
-
-                    DoubleAnimation translateYAnimation = new DoubleAnimation();
-                    translateYAnimation.From = 0;
-                    translateYAnimation.To = 1000;
-                    translateYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(3000));
-
-                    Storyboard.SetTarget(translateYAnimation, ellipse);
-                    Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
-
-                    storyboard.Children.Add(translateYAnimation);
-                    canvas.Children.Add(ellipse);
-                    storyboard.Begin();
-                }                                
-
-                
             }
         }
 
@@ -156,16 +73,256 @@ namespace EjercicioAnimaciones
             moverEstrellas.Begin();
         }
 
-        private void animacionCompletada(object sender, object e)
+        private Ellipse crearEllipse()
         {
+            Ellipse ellipse = new Ellipse() ;
             Random rnd = new Random();
-            Ellipse ellipse = new Ellipse();
-            DoubleAnimation translateYAnimation = (DoubleAnimation)sender;
+            ellipse.Height = 10;
+            ellipse.Width = 10;
+            Canvas.SetLeft(ellipse, rnd.Next(1500));
+            Canvas.SetTop(ellipse, rnd.Next(1000));
+            ellipse.Stroke = new SolidColorBrush(Colors.Violet);
+            ellipse.Fill = new SolidColorBrush(Colors.White);
 
+            ellipse.RenderTransform = new TranslateTransform();
+            return ellipse;
+            
+        }
+
+        public void crearAnimacion(Ellipse ellipse) {
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation translateYAnimation = new DoubleAnimation();
             translateYAnimation.From = 0;
             translateYAnimation.To = 1000;
-            translateYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(10000));
-        }        
+            translateYAnimation.Duration = new Duration(TimeSpan.FromSeconds((10 * 2) / ellipse.Height));
+
+            Storyboard.SetTarget(translateYAnimation, ellipse);
+            Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
+
+            storyboard.Children.Add(translateYAnimation);
+            canvas.Children.Add(ellipse);
+            translateYAnimation.Completed += (Sender, e) => {
+                Random rnd = new Random();
+                int aleatorio;
+                canvas.Children.Remove(ellipse);
+                aleatorio = rnd.Next(3);
+                Ellipse ellipseNueva;
+                switch (aleatorio)
+                {
+                    case 0:
+                       ellipseNueva = crearEllipse();
+                       Canvas.SetTop(ellipseNueva, 0);
+                       crearAnimacion(ellipseNueva);
+                    break;
+                    case 1:
+                        ellipseNueva = crearEllipse2();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion2(ellipseNueva);
+                        break;
+                    case 2:
+                        ellipseNueva = crearEllipse3();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion3(ellipseNueva);
+                        break;
+                    case 3:
+                        ellipseNueva = crearEllipse4();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion4(ellipseNueva);
+                        break;
+                }
+            };
+            storyboard.Begin();
+        }
+
+        private Ellipse crearEllipse2()
+        {
+            Ellipse ellipse = new Ellipse();
+            Random rnd = new Random();
+            ellipse.Height = 7;
+            ellipse.Width = 7;
+            Canvas.SetLeft(ellipse, rnd.Next(1500));
+            Canvas.SetTop(ellipse, rnd.Next(1000));
+            ellipse.Stroke = new SolidColorBrush(Colors.Violet);
+            ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.RenderTransform = new TranslateTransform();
+
+            return ellipse;
+
+        }
+
+        public void crearAnimacion2(Ellipse ellipse)
+        {
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation translateYAnimation = new DoubleAnimation();
+            translateYAnimation.From = 0;
+            translateYAnimation.To = 1000;
+            translateYAnimation.Duration = new Duration(TimeSpan.FromSeconds((10 * 2) / ellipse.Height));
+
+            Storyboard.SetTarget(translateYAnimation, ellipse);
+            Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
+
+            storyboard.Children.Add(translateYAnimation);
+            canvas.Children.Add(ellipse);
+            translateYAnimation.Completed += (Sender, e) => {
+                Random rnd = new Random();
+                int aleatorio;
+                canvas.Children.Remove(ellipse);
+                aleatorio = rnd.Next(3);
+                Ellipse ellipseNueva;
+                switch (aleatorio)                
+                {
+                    case 0:
+                        ellipseNueva = crearEllipse();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion(ellipseNueva);
+                        break;
+                    case 1:
+                        ellipseNueva = crearEllipse2();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion2(ellipseNueva);
+                        break;
+                    case 2:
+                        ellipseNueva = crearEllipse3();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion3(ellipseNueva);
+                        break;
+                    case 3:
+                        ellipseNueva = crearEllipse4();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion4(ellipseNueva);
+                        break;
+                }
+            };
+            storyboard.Begin();
+        }
+
+        private Ellipse crearEllipse3()
+        {
+            Ellipse ellipse = new Ellipse();
+            Random rnd = new Random();
+            ellipse.Height = 4;
+            ellipse.Width = 4;
+            Canvas.SetLeft(ellipse, rnd.Next(1500));
+            Canvas.SetTop(ellipse, rnd.Next(1000));
+            ellipse.Stroke = new SolidColorBrush(Colors.Violet);
+            ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.RenderTransform = new TranslateTransform();
+
+            return ellipse;
+
+        }
+
+        public void crearAnimacion3(Ellipse ellipse)
+        {
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation translateYAnimation = new DoubleAnimation();
+            translateYAnimation.From = 0;
+            translateYAnimation.To = 1000;
+            translateYAnimation.Duration = new Duration(TimeSpan.FromSeconds((10 * 2) / ellipse.Height));
+
+            Storyboard.SetTarget(translateYAnimation, ellipse);
+            Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
+
+            storyboard.Children.Add(translateYAnimation);
+            canvas.Children.Add(ellipse);
+            translateYAnimation.Completed += (Sender, e) => {
+                Random rnd = new Random();
+                int aleatorio;
+                canvas.Children.Remove(ellipse);
+                aleatorio = rnd.Next(3);
+                Ellipse ellipseNueva;
+                switch (aleatorio)
+                {
+                    case 0:
+                        ellipseNueva = crearEllipse();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion(ellipseNueva);
+                        break;
+                    case 1:
+                        ellipseNueva = crearEllipse2();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion2(ellipseNueva);
+                        break;
+                    case 2:
+                        ellipseNueva = crearEllipse3();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion3(ellipseNueva);
+                        break;
+                    case 3:
+                        ellipseNueva = crearEllipse4();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion4(ellipseNueva);
+                        break;
+                }
+            };
+            storyboard.Begin();
+        }
+
+        private Ellipse crearEllipse4()
+        {
+            Ellipse ellipse = new Ellipse();
+            Random rnd = new Random();
+            ellipse.Height = 2;
+            ellipse.Width = 2;
+            Canvas.SetLeft(ellipse, rnd.Next(1500));
+            Canvas.SetTop(ellipse, rnd.Next(1000));
+            ellipse.Stroke = new SolidColorBrush(Colors.Violet);
+            ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.RenderTransform = new TranslateTransform();
+
+            return ellipse;
+
+        }
+
+        public void crearAnimacion4(Ellipse ellipse)
+        {
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation translateYAnimation = new DoubleAnimation();
+            translateYAnimation.From = 0;
+            translateYAnimation.To = 1000;
+            translateYAnimation.Duration = new Duration(TimeSpan.FromSeconds((10 * 2) / ellipse.Height));
+
+            Storyboard.SetTarget(translateYAnimation, ellipse);
+            Storyboard.SetTargetProperty(translateYAnimation, "(UIElement.RenderTransform).(TranslateTransform.Y)");
+
+            storyboard.Children.Add(translateYAnimation);
+            canvas.Children.Add(ellipse);
+            translateYAnimation.Completed += (Sender, e) => {
+                Random rnd = new Random();
+                int aleatorio;
+                canvas.Children.Remove(ellipse);
+                aleatorio = rnd.Next(3);
+                Ellipse ellipseNueva;
+                switch (aleatorio)
+                {
+                    case 0:
+                        ellipseNueva = crearEllipse();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion(ellipseNueva);
+                        break;
+                    case 1:
+                        ellipseNueva = crearEllipse2();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion2(ellipseNueva);
+                        break;
+                    case 2:
+                        ellipseNueva = crearEllipse3();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion3(ellipseNueva);
+                        break;
+                    case 3:
+                        ellipseNueva = crearEllipse4();
+                        Canvas.SetTop(ellipseNueva, 0);
+                        crearAnimacion4(ellipseNueva);
+                        break;
+                }
+            };
+            storyboard.Begin();
+        }
 
         private void allowfocus_Loaded(object sender, RoutedEventArgs e)
         {

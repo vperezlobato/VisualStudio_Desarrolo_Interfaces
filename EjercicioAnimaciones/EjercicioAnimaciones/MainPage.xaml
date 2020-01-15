@@ -13,8 +13,9 @@
         <vm:MainPageVM></vm:MainPageVM>
     </Page.DataContext>
     
-    <Canvas x:Name="canvas" Background="Black" Loaded="allowfocus_Loaded" MaxHeight="1000" MaxWidth="1000">
+    <Canvas x:Name="canvas" Background="Black" Loaded="allowfocus_Loaded" MaxHeight="1000" MaxWidth="1500">
         <Canvas.Resources>
+
             <Storyboard x:Name="moverEstrellas">
 
                 <DoubleAnimation x:Name="animacionEjeY" Storyboard.TargetName="TranslateTransform"
@@ -24,7 +25,7 @@
                 </DoubleAnimation>
             </Storyboard>
         </Canvas.Resources>
-        <Image Name="stkJugador1"  Width="200" Height="200" Source="ms-appx:///Assets/Spaceship-PNG-File.png" 
+        <Image Canvas.ZIndex="20" Name="stkJugador1"  Width="200" Height="200" Source="ms-appx:///Assets/Spaceship-PNG-File.png" 
                    KeyDown="{x:Bind vMGame.Grid_KeyDown,Mode=OneWay}" KeyUp="{x:Bind vMGame.Grid_KeyUp}" 
                    Canvas.Left="{Binding nave.posX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    Canvas.Top="{Binding nave.posY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></Image>
