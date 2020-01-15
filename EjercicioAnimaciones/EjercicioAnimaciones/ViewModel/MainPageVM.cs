@@ -103,9 +103,10 @@ namespace EjercicioAnimaciones.ViewModel
         public void move()
         {
             Double posicionFutura;
+            Double posicionFururaPerpe;
             if (moviendoY) { 
                 posicionFutura = _nave.posY + _nave.velocidad;
-                if (posicionFutura > 0 && posicionFutura < 1000)
+                if (posicionFutura > 0 && posicionFutura < 500)
                 {
                     _nave.posY += _nave.velocidad;
                 } 
@@ -114,13 +115,14 @@ namespace EjercicioAnimaciones.ViewModel
             if (moviendoX)
             {
                 posicionFutura = _nave.posX + _nave.velocidad;
-                if (posicionFutura > 0 && posicionFutura < 1000)
+                if (posicionFutura > 0 && posicionFutura < 1180)
                 {
                     _nave.posX += _nave.velocidad;
                 }
             }
+
             NotifyPropertyChanged("nave");
-            
+
         }
 
         /// <summary>
@@ -130,7 +132,7 @@ namespace EjercicioAnimaciones.ViewModel
         {
             //_velocidad = 10;
  
-            if (_nave.posY < 1000)
+            if (_nave.posY < 500)
             {
                 _nave.velocidad = 10;
             }
@@ -162,7 +164,7 @@ namespace EjercicioAnimaciones.ViewModel
         {
             //_velocidad = 10;
 
-            if (_nave.posX < 1000)
+            if (_nave.posX < 1180)
             {
                 _nave.velocidad = 10;
             }

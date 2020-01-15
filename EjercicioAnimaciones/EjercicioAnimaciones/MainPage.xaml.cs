@@ -37,10 +37,10 @@ namespace EjercicioAnimaciones
             animacionEjeY.From = 10;
             moverEstrellas.Begin();
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 50; i++) {
                 Random rnd = new Random();
                 int aleatorio;
-                aleatorio = rnd.Next(3);
+                aleatorio = rnd.Next(4);
                 Ellipse ellipse = new Ellipse();
                 switch (aleatorio)
                 {
@@ -77,13 +77,13 @@ namespace EjercicioAnimaciones
         {
             Ellipse ellipse = new Ellipse() ;
             Random rnd = new Random();
-            ellipse.Height = 10;
-            ellipse.Width = 10;
+            ellipse.Height = 15;
+            ellipse.Width = 15;
             Canvas.SetLeft(ellipse, rnd.Next(1500));
-            Canvas.SetTop(ellipse, rnd.Next(1000));
+            Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
             ellipse.Fill = new SolidColorBrush(Colors.White);
-
+            ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
             return ellipse;
             
@@ -102,11 +102,12 @@ namespace EjercicioAnimaciones
 
             storyboard.Children.Add(translateYAnimation);
             canvas.Children.Add(ellipse);
+            storyboard.Begin();
             translateYAnimation.Completed += (Sender, e) => {
                 Random rnd = new Random();
                 int aleatorio;
                 canvas.Children.Remove(ellipse);
-                aleatorio = rnd.Next(3);
+                aleatorio = rnd.Next(4);
                 Ellipse ellipseNueva;
                 switch (aleatorio)
                 {
@@ -132,19 +133,19 @@ namespace EjercicioAnimaciones
                         break;
                 }
             };
-            storyboard.Begin();
         }
 
         private Ellipse crearEllipse2()
         {
             Ellipse ellipse = new Ellipse();
             Random rnd = new Random();
-            ellipse.Height = 7;
-            ellipse.Width = 7;
+            ellipse.Height = 10;
+            ellipse.Width = 10;
             Canvas.SetLeft(ellipse, rnd.Next(1500));
-            Canvas.SetTop(ellipse, rnd.Next(1000));
+            Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
             ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
 
             return ellipse;
@@ -165,11 +166,12 @@ namespace EjercicioAnimaciones
 
             storyboard.Children.Add(translateYAnimation);
             canvas.Children.Add(ellipse);
+            storyboard.Begin();
             translateYAnimation.Completed += (Sender, e) => {
                 Random rnd = new Random();
                 int aleatorio;
                 canvas.Children.Remove(ellipse);
-                aleatorio = rnd.Next(3);
+                aleatorio = rnd.Next(4);
                 Ellipse ellipseNueva;
                 switch (aleatorio)                
                 {
@@ -195,19 +197,19 @@ namespace EjercicioAnimaciones
                         break;
                 }
             };
-            storyboard.Begin();
         }
 
         private Ellipse crearEllipse3()
         {
             Ellipse ellipse = new Ellipse();
             Random rnd = new Random();
-            ellipse.Height = 4;
-            ellipse.Width = 4;
+            ellipse.Height = 7;
+            ellipse.Width = 7;
             Canvas.SetLeft(ellipse, rnd.Next(1500));
-            Canvas.SetTop(ellipse, rnd.Next(1000));
+            Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
             ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
 
             return ellipse;
@@ -228,11 +230,12 @@ namespace EjercicioAnimaciones
 
             storyboard.Children.Add(translateYAnimation);
             canvas.Children.Add(ellipse);
+            storyboard.Begin();
             translateYAnimation.Completed += (Sender, e) => {
                 Random rnd = new Random();
                 int aleatorio;
                 canvas.Children.Remove(ellipse);
-                aleatorio = rnd.Next(3);
+                aleatorio = rnd.Next(4);
                 Ellipse ellipseNueva;
                 switch (aleatorio)
                 {
@@ -258,19 +261,20 @@ namespace EjercicioAnimaciones
                         break;
                 }
             };
-            storyboard.Begin();
+            
         }
 
         private Ellipse crearEllipse4()
         {
             Ellipse ellipse = new Ellipse();
             Random rnd = new Random();
-            ellipse.Height = 2;
-            ellipse.Width = 2;
+            ellipse.Height = 3;
+            ellipse.Width = 3;
             Canvas.SetLeft(ellipse, rnd.Next(1500));
-            Canvas.SetTop(ellipse, rnd.Next(1000));
+            Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
             ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
 
             return ellipse;
@@ -291,11 +295,12 @@ namespace EjercicioAnimaciones
 
             storyboard.Children.Add(translateYAnimation);
             canvas.Children.Add(ellipse);
+            storyboard.Begin();
             translateYAnimation.Completed += (Sender, e) => {
                 Random rnd = new Random();
                 int aleatorio;
                 canvas.Children.Remove(ellipse);
-                aleatorio = rnd.Next(3);
+                aleatorio = rnd.Next(4);
                 Ellipse ellipseNueva;
                 switch (aleatorio)
                 {
@@ -321,7 +326,7 @@ namespace EjercicioAnimaciones
                         break;
                 }
             };
-            storyboard.Begin();
+            
         }
 
         private void allowfocus_Loaded(object sender, RoutedEventArgs e)
