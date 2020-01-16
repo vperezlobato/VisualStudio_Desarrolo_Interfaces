@@ -26,7 +26,7 @@ namespace PongSignalR
             _controlJuego.añadirObjetoJuego(id);
         }
 
-        public void actualizarPosicionObjeto(ObjetoJuego objetoJuegoCliente)
+        public void actualizarPosicionObjeto(objetoJuego objetoJuegoCliente)
         {
             objetoJuegoCliente.ultimoActualizado = Context.ConnectionId;
 

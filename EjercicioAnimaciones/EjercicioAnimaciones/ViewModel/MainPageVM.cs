@@ -103,7 +103,6 @@ namespace EjercicioAnimaciones.ViewModel
         public void move()
         {
             Double posicionFutura;
-            Double posicionFururaPerpe;
             if (moviendoY) { 
                 posicionFutura = _nave.posY + _nave.velocidad;
                 if (posicionFutura > 0 && posicionFutura < 500)

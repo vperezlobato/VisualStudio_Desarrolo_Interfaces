@@ -19,7 +19,7 @@ namespace PongSignalR
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<PongHub>();
         }
 
-        public void Broadcast(IEnumerable<ObjetoJuego> objetosJuegoMovidos)
+        public void Broadcast(IEnumerable<objetoJuego> objetosJuegoMovidos)
         {
             // Avisa al cliente de la nueva posicion de los objetos
             foreach (var objetoJuego in objetosJuegoMovidos)
@@ -31,7 +31,7 @@ namespace PongSignalR
             }
         }
 
-        public void Broadcast(IEnumerable<ObjetoJuego> objetosJuego, string connectionId)
+        public void Broadcast(IEnumerable<objetoJuego> objetosJuego, string connectionId)
         {
             //Avisa solo el cliente de connectionId
 

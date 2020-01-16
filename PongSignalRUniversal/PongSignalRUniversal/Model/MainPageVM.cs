@@ -36,6 +36,7 @@ namespace PongSignalRUniversal.Model
                 _pelota = new objetoJuego(250, "pelota", "pelota", false, 100, 500, null);
                 if (conn.State == ConnectionState.Connected)
                 {
+                    getCliente();
                     proxy.Invoke("añadirObjetoJuego", _pelota.id);
                     proxy.Invoke("añadirObjetoJuego", _jugador1.id);
                     proxy.Invoke("añadirObjetoJuego", _jugador2.id);
@@ -43,7 +44,7 @@ namespace PongSignalRUniversal.Model
 
             }while(conn.State != ConnectionState.Connected);
 
-            getCliente();
+            
          }
 
         public objetoJuego jugador1 {
@@ -120,6 +121,7 @@ namespace PongSignalRUniversal.Model
                 if (posicionFutura > 0 && posicionFutura < 1000)
                 {
                     _jugador1.posicionY += _jugador1.velocidad;
+                    proxy.Invoke("actualizarPosicionObjeto", jugador1);
                 }
                 NotifyPropertyChanged("jugador1");
             }
@@ -130,6 +132,7 @@ namespace PongSignalRUniversal.Model
                     if (posicionFutura > 0 && posicionFutura < 1000)
                     {
                         _jugador2.posicionY += _jugador2.velocidad;
+                        proxy.Invoke("actualizarPosicionObjeto", jugador2);
                     }
                     NotifyPropertyChanged("jugador2");
                 }
