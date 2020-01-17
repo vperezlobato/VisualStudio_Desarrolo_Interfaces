@@ -68,7 +68,6 @@ namespace PongSignalR
         public void actualizarPosicionObjeto(objetoJuego modeloCliente)
         {
             var objetoJuego = _objetosJuego.FirstOrDefault(g => g.id == modeloCliente.id);
-
             if (objetoJuego != null)
             {
                 objetoJuego.izquierda = modeloCliente.izquierda;
