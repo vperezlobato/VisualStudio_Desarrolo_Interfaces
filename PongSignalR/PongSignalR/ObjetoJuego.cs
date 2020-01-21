@@ -5,11 +5,11 @@ using System.Web;
 
 namespace PongSignalR
 {
-    public class ObjetoJuego
+    public class objetoJuego
     {
         public double izquierda { get; set; }
 
-        public double top { get; set; }
+        public double posicionY { get; set; }
 
         public string id { get; set; }
 

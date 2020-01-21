@@ -82,7 +82,7 @@ namespace EjercicioAnimaciones
             Canvas.SetLeft(ellipse, rnd.Next(1500));
             Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-            ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.Fill = new SolidColorBrush(Colors.Violet);
             ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
             return ellipse;
@@ -144,7 +144,7 @@ namespace EjercicioAnimaciones
             Canvas.SetLeft(ellipse, rnd.Next(1500));
             Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-            ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.Fill = new SolidColorBrush(Colors.Red);
             ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
 
@@ -208,7 +208,7 @@ namespace EjercicioAnimaciones
             Canvas.SetLeft(ellipse, rnd.Next(1500));
             Canvas.SetTop(ellipse, rnd.Next(500));
             ellipse.Stroke = new SolidColorBrush(Colors.Violet);
-            ellipse.Fill = new SolidColorBrush(Colors.White);
+            ellipse.Fill = new SolidColorBrush(Colors.Yellow);
             ellipse.Opacity = (1.0 * ellipse.Height) / 5;
             ellipse.RenderTransform = new TranslateTransform();
 

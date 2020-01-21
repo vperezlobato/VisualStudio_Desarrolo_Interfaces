@@ -14,7 +14,7 @@ namespace PongSignalR
 
         private movimientosPelota _movimientoPelota;
         private Broadcaster _broadcaster;
-        private List<ObjetoJuego> _objetosJuego;
+        private List<objetoJuego> _objetosJuego;
         private Timer _broadcastLoop;
 
         public string jugador1ConnectionId { get; set; }
@@ -32,7 +32,7 @@ namespace PongSignalR
         {
             BroadcastInterval = TimeSpan.FromMilliseconds(40);
 
-            _objetosJuego = new List<ObjetoJuego>();
+            _objetosJuego = new List<objetoJuego>();
             _broadcaster = new Broadcaster();
         }
 
@@ -40,7 +40,7 @@ namespace PongSignalR
         {
             if (!_objetosJuego.Any(g => g.id == id))
             {
-                var objetoJuego = new ObjetoJuego { id = id };
+                var objetoJuego = new objetoJuego { id = id };
                 _objetosJuego.Add(objetoJuego);
 
                 if (id == "pelota")
@@ -65,14 +65,13 @@ namespace PongSignalR
             _movimientoPelota.golpeoJugador2();
         }
 
-        public void actualizarPosicionObjeto(ObjetoJuego modeloCliente)
+        public void actualizarPosicionObjeto(objetoJuego modeloCliente)
         {
             var objetoJuego = _objetosJuego.FirstOrDefault(g => g.id == modeloCliente.id);
-
             if (objetoJuego != null)
             {
                 objetoJuego.izquierda = modeloCliente.izquierda;
-                objetoJuego.top = modeloCliente.top;
+                objetoJuego.posicionY = modeloCliente.posicionY;
                 objetoJuego.ultimoActualizado = modeloCliente.ultimoActualizado;
                 objetoJuego.seHaMovido = true;
             }

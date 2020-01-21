@@ -14,16 +14,16 @@ namespace PongSignalR
         private const int limiteAbajo = 0;
         private const int limiteArriba = 500;
 
-        private ObjetoJuego _objetoJuego;
+        private objetoJuego _objetoJuego;
         private int _angulo;
         private float _velocidad;
         private enumColision _ultimaColision;
 
-        public movimientosPelota(ObjetoJuego objetoJuego)
+        public movimientosPelota(objetoJuego objetoJuego)
         {
             //Colocar la pelota en el centro
             objetoJuego.izquierda = 500;
-            objetoJuego.top = 250;
+            objetoJuego.posicionY = 250;
 
             _objetoJuego = objetoJuego;
             _velocidad = 8f;
@@ -38,7 +38,7 @@ namespace PongSignalR
                 manejarColisionMuroVertical();
             }
 
-            if (_objetoJuego.top <= limiteAbajo ||  _objetoJuego.top >= limiteArriba)
+            if (_objetoJuego.posicionY <= limiteAbajo ||  _objetoJuego.posicionY >= limiteArriba)
             {
                 _ultimaColision = enumColision.muro;
                 manejarColisionMuroHorizontal();
@@ -70,7 +70,7 @@ namespace PongSignalR
         public void actualizar()
         {
             _objetoJuego.izquierda += Math.Cos(_angulo * enRadianes) * _velocidad;
-            _objetoJuego.top += Math.Sin(_angulo * enRadianes) * _velocidad;
+            _objetoJuego.posicionY += Math.Sin(_angulo * enRadianes) * _velocidad;
 
             _objetoJuego.seHaMovido = true;
 
