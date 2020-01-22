@@ -10,14 +10,13 @@
 
     <RelativePanel Background="#FF46B0CF">
         <Button Name="btnVolver" RelativePanel.AlignLeftWithPanel="True" Click="Button_Click"
-        Background="#FF46B0CF"
-        Height="100" Width="80">
+        Background="#FF46B0CF">
             <StackPanel>
                 <Image Source="Assets/photo.png" Height="62"/>
             </StackPanel>
         </Button>
         <Image Source="Assets/2.png" RelativePanel.AlignVerticalCenterWith="border" RelativePanel.RightOf="border" Margin="-144,-7,111,-7"/>
-        <TextBlock RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWith="btnVolver"  Text="Creacion Sala" FontSize="40" Margin="150,20,0,0"></TextBlock>
+        <TextBlock RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWith="btnVolver"  Text="Creacion Sala" FontSize="40" Margin="150,00,0,0"></TextBlock>
 
         <Border Background="#FFF3F3F3" Name="border" Margin="0,0,100,0" BorderBrush="Black" BorderThickness="4" CornerRadius="10" Height="300" Width="600" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
             <RelativePanel  Background="#FF8DE8E8">
@@ -33,7 +32,7 @@
                 </ComboBox>
             </RelativePanel>
         </Border>
-        <Button Content="Crear" RelativePanel.Below="border" FontSize="40" Margin="0,40,100,0" RelativePanel.AlignHorizontalCenterWith="border"></Button>
+        <Button Content="Crear" RelativePanel.Below="border" CornerRadius="20" FontSize="40" Margin="0,40,100,0" RelativePanel.AlignHorizontalCenterWith="border"></Button>
     
         
     </RelativePanel>
