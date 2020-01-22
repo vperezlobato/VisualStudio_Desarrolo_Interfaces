@@ -25,7 +25,7 @@ namespace PongSignalR
             foreach (var objetoJuego in objetosJuegoMovidos)
             {
 
-                _hubContext.Clients.AllExcept(objetoJuego.ultimoActualizado).actualizarPosicionObjetoCliente(objetoJuego);
+                _hubContext.Clients.AllExcept(objetoJuego.ultimoActualizado).actualizarPosicionObjeto(objetoJuego);
 
                 objetoJuego.seHaMovido = false;
             }
@@ -36,7 +36,7 @@ namespace PongSignalR
             //Avisa solo el cliente de connectionId
 
             foreach (var objetoJuego in objetosJuego)
-                _hubContext.Clients.Client(connectionId).actualizarPosicionObjetoCliente(objetoJuego);
+                _hubContext.Clients.Client(connectionId).actualizarPosicionObjeto(objetoJuego);
         }
     }
 }
