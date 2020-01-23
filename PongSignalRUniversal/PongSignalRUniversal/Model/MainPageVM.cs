@@ -86,6 +86,7 @@ namespace PongSignalRUniversal.Model
         private void timerTick(object sender, object e)
         {
             move();
+            actualizarPosicionesObjeto();
         }
 
         /// <summary>
@@ -133,7 +134,6 @@ namespace PongSignalRUniversal.Model
                 {
                     _objetosJuego[0].posicionY += _objetosJuego[0].velocidad;
                     _objetosJuego[0].seHaMovido = true;
-                    actualizarPosicionesObjeto();
                 }
                 NotifyPropertyChanged("objetosJuegos");
             }
@@ -146,7 +146,7 @@ namespace PongSignalRUniversal.Model
                     {
                         _objetosJuego[1].posicionY += _objetosJuego[1].velocidad;
                         _objetosJuego[1].seHaMovido = true;
-                        actualizarPosicionesObjeto();
+                        
                     }
                     NotifyPropertyChanged("objetosJuegos");
                 }
@@ -227,7 +227,6 @@ namespace PongSignalRUniversal.Model
         {
             foreach (var index in _objetosJuego)
             {
-
                 if (index.seHaMovido)
                 {
                     proxy.Invoke("actualizarPosicionObjeto", index);
@@ -247,7 +246,7 @@ namespace PongSignalRUniversal.Model
                         index.posicionY = objetoJuego.posicionY;
                     }
                 }
-
+                NotifyPropertyChanged("objetosJuegos");
             });
 
         }

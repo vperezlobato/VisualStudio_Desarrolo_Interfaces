@@ -19,7 +19,7 @@ namespace PongSignalRCopia.Model
         private IHubProxy proxy;
 
         private DispatcherTimer dispatcherTimer { get; set; }
-        private enumColision _colision;
+        private enumJugador _colision;
         private List<objetoJuego> _objetosJuego;
         private CoreDispatcher _dispatcher;
 
@@ -37,7 +37,7 @@ namespace PongSignalRCopia.Model
             _objetosJuego = new List<objetoJuego>();
 
             do
-            {                
+            {
                 if (conn.State == ConnectionState.Connected)
                 {
                     objetoJuego _jugador1 = new objetoJuego(0.0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
@@ -66,12 +66,12 @@ namespace PongSignalRCopia.Model
             set
             {
                 _objetosJuego = value;
-                
+
             }
         }
 
 
-        public enumColision colision
+        public enumJugador colision
         {
             get
             {
@@ -86,6 +86,7 @@ namespace PongSignalRCopia.Model
         private void timerTick(object sender, object e)
         {
             move();
+            actualizarPosicionesObjeto();
         }
 
         /// <summary>
@@ -126,27 +127,26 @@ namespace PongSignalRCopia.Model
         public void move()
         {
             Double posicionFutura;
-            if (_colision == enumColision.jugador1)
+            if (_colision == enumJugador.jugador1)
             {
                 posicionFutura = _objetosJuego[0].posicionY + _objetosJuego[0].velocidad;
                 if (posicionFutura > 0 && posicionFutura < 1000)
                 {
                     _objetosJuego[0].posicionY += _objetosJuego[0].velocidad;
                     _objetosJuego[0].seHaMovido = true;
-                    actualizarPosicionesObjeto();
                 }
                 NotifyPropertyChanged("objetosJuegos");
             }
             else
             {
-                if (_colision == enumColision.jugador2)
+                if (_colision == enumJugador.jugador2)
                 {
                     posicionFutura = _objetosJuego[1].posicionY + _objetosJuego[1].velocidad;
                     if (posicionFutura > 0 && posicionFutura < 1000)
                     {
                         _objetosJuego[1].posicionY += _objetosJuego[1].velocidad;
                         _objetosJuego[1].seHaMovido = true;
-                        actualizarPosicionesObjeto();
+
                     }
                     NotifyPropertyChanged("objetosJuegos");
                 }
@@ -159,7 +159,7 @@ namespace PongSignalRCopia.Model
         public void abajo()
         {
             //_velocidad = 10;
-            if (_colision == enumColision.jugador1)
+            if (_colision == enumJugador.jugador1)
             {
                 if (_objetosJuego[0].posicionY < 1000)
                 {
@@ -172,7 +172,7 @@ namespace PongSignalRCopia.Model
             }
             else
             {
-                if (_colision == enumColision.jugador2)
+                if (_colision == enumJugador.jugador2)
                 {
                     if (_objetosJuego[1].posicionY < 1000)
                     {
@@ -191,7 +191,7 @@ namespace PongSignalRCopia.Model
         public void arriba()
         {
             //_velocidad = -10;
-            if (_colision == enumColision.jugador1)
+            if (_colision == enumJugador.jugador1)
             {
                 if (_objetosJuego[0].posicionY > 0 && _objetosJuego[0].posicionY - 10 > 0)
                 {
@@ -204,7 +204,7 @@ namespace PongSignalRCopia.Model
             }
             else
             {
-                if (_colision == enumColision.jugador2)
+                if (_colision == enumJugador.jugador2)
                 {
                     if (_objetosJuego[1].posicionY > 0 && _objetosJuego[1].posicionY - 10 > 0)
                     {
@@ -220,14 +220,13 @@ namespace PongSignalRCopia.Model
 
         public async void getCliente()
         {
-            _colision = await proxy.Invoke<enumColision>("getCliente");
+            _colision = await proxy.Invoke<enumJugador>("getCliente");
         }
 
         public void actualizarPosicionesObjeto()
         {
             foreach (var index in _objetosJuego)
             {
-
                 if (index.seHaMovido)
                 {
                     proxy.Invoke("actualizarPosicionObjeto", index);
@@ -247,9 +246,9 @@ namespace PongSignalRCopia.Model
                         index.posicionY = objetoJuego.posicionY;
                     }
                 }
-                
+                NotifyPropertyChanged("objetosJuegos");
             });
-            
+
         }
     }
 }

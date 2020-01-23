@@ -8,7 +8,11 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <RelativePanel Background="#FF46B0CF">
+    <!--->
+    ILLO ACORDARSE DE COGER LAS FOTOS DE ASSETS
+    <-->
+
+    <RelativePanel Background="#4F98CA">
         <Image Source="ms-appx:///Assets/mancha.png" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"></Image>
 
         <Border CornerRadius="0,0,20,0" Background="#FF1B1919" Width="1000" Height="60" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True">
@@ -16,7 +20,7 @@
         </Border>
 
         <Border BorderBrush="Black" BorderThickness="4" CornerRadius="10" Height="200" Width="400" Background="White" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-            <Grid>
+            <Grid Background="#EFFFFB">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>

@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\enumColision.cs" />
+    <Compile Include="Models\enumJugador.cs" />
     <Compile Include="Models\objetoJuego.cs" />
     <Compile Include="ViewModel\clsVMBase.cs" />
     <Compile Include="ViewModel\MainPageVM.cs" />
