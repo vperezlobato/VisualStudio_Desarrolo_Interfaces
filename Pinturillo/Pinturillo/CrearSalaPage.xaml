@@ -25,8 +25,8 @@
             <RelativePanel  Background="#EFFFFB">
                 <TextBox Name="txtboxNombreSala" Margin="0,40,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" Width="270" Height="40" BorderBrush="Black" FontSize="20"  PlaceholderText="Escribe el nombre de sala"></TextBox>
 
-            <CheckBox Name="checkbox" Margin="0,20,0,0" FontWeight="Medium" FontSize="15" Content="Hacer sala privada" RelativePanel.AlignLeftWith="txtboxNombreSala" RelativePanel.Below="txtboxNombreSala"></CheckBox>
-            <PasswordBox Name="passwordbox" Margin="0,20,0,0" PlaceholderText="Contraseña" RelativePanel.Below="checkbox" RelativePanel.AlignLeftWith="checkbox" Width="270" Height="40" BorderBrush="Black" FontSize="20"></PasswordBox>
+                <CheckBox Name="checkbox" Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" Margin="0,20,0,0" FontWeight="Medium" FontSize="15" Content="Hacer sala privada" RelativePanel.AlignLeftWith="txtboxNombreSala" RelativePanel.Below="txtboxNombreSala"></CheckBox>
+                <PasswordBox Name="passwordbox" Margin="0,20,0,0" PlaceholderText="Contraseña" RelativePanel.Below="checkbox" RelativePanel.AlignLeftWith="checkbox" Width="270" Height="40" BorderBrush="Black" FontSize="20"></PasswordBox>
                 <ComboBox Margin="0,20,0,0" RelativePanel.Below="passwordbox" RelativePanel.AlignLeftWith="passwordbox" PlaceholderText="Nº Maximo de jugadores">
                     <x:String>2</x:String>
                     <x:String>3</x:String>

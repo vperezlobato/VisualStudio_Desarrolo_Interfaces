@@ -25,10 +25,40 @@ namespace Pinturillo
         public CrearSalaPage()
         {
             this.InitializeComponent();
+            passwordbox.Visibility = Visibility.Collapsed;
         }       
             private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void CheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            if (checkbox.IsChecked == true) {
+                passwordbox.Visibility = Visibility.Visible;
+            }else
+                passwordbox.Visibility = Visibility.Collapsed;
+        }
+
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ContentDialog confirmadoCorrectamente = new ContentDialog();
+            if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
+            {
+                confirmadoCorrectamente.Title = "Bienvenido";
+                confirmadoCorrectamente.Content = $"Hola, {e.Parameter.ToString()}";
+                confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
+                ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
+            }
+            else
+            {
+                confirmadoCorrectamente.Title = "Bienvenido";
+                confirmadoCorrectamente.Content = "Hola";
+                confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
+                ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
+            }
+            base.OnNavigatedTo(e);
         }
     }
 }

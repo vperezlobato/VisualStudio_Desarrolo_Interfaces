@@ -4,26 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pinturillo
+namespace Pinturillo.ViewModels
 {
     public class CrearSalaVM : clsVMBase
     {
         private String _nombreUsuario;
-        private clsPartida _partida;
+        //private clsPartida _partida;
         private String _lblErrorNombreSala; //Si la sala ya existe muestra este label
         private String _lblErrorContrasena; //Si se marca el checkbox de sala privada y no se escribe contrasena
         private DelegateCommand _crearPartida;
 
         public CrearSalaVM()
         {
-            _nombreUsuario = "";
-            _partida = new clsPartida();
-            _lblErrorNombreSala = "";
-            _lblErrorContrasena = "";
+            //_partida = new clsPartida();
         }
 
         public String NombreUsuario { get => _nombreUsuario; set => _nombreUsuario = value; }
-        public clsPartida Partida { get => _partida; set => _partida = value; }
+        //public clsPartida Partida { get => _partida; set => _partida = value; }
         public String LblErrorNombreSala { get => _lblErrorNombreSala; set => _lblErrorNombreSala = value; }
         public String LblErrorContrasena { get => _lblErrorContrasena; set => _lblErrorContrasena = value; }
 
