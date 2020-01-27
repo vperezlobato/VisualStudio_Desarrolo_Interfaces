@@ -35,17 +35,17 @@ namespace PongSignalRUniversal.Model
             _dispatcher = Window.Current.Dispatcher;
 
             _objetosJuego = new List<objetoJuego>();
+            objetoJuego _jugador1 = new objetoJuego(0.0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
+            objetoJuego _jugador2 = new objetoJuego(880, "jugador2", "jugador2", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
+            objetoJuego _pelota = new objetoJuego(250, "pelota", "pelota", false, 100, 500, null);
+            _objetosJuego.Add(_jugador1);
+            _objetosJuego.Add(_jugador2);
+            _objetosJuego.Add(_pelota);
 
             do
             {
                 if (conn.State == ConnectionState.Connected)
-                {
-                    objetoJuego _jugador1 = new objetoJuego(0.0, "jugador1", "jugador1", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
-                    objetoJuego _jugador2 = new objetoJuego(880, "jugador2", "jugador2", false, 50, 300, new Uri("ms-appx:///Assets/barra.png"));
-                    objetoJuego _pelota = new objetoJuego(250, "pelota", "pelota", false, 100, 500, null);
-                    _objetosJuego.Add(_jugador1);
-                    _objetosJuego.Add(_jugador2);
-                    _objetosJuego.Add(_pelota);
+                {                    
                     getCliente();
                     proxy.Invoke("añadirObjetoJuego", _objetosJuego[0].id);
                     proxy.Invoke("añadirObjetoJuego", _objetosJuego[1].id);
