@@ -42,7 +42,7 @@ namespace Pinturillo.ViewModels
         #region"Constructor"
         public VMListadoSalas()
         {
-            this._usuarioPropio = new clsJugador();
+            //this._usuarioPropio = new clsJugador();
 
             //TODO todas las cosas de SignalR
 

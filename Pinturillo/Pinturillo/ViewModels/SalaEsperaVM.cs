@@ -23,7 +23,7 @@ namespace Pinturillo.ViewModels
         {
             // Aquí obtendría la partida enviada desde la otra ventana
 
-            partida = new clsPartida();
+            //partida = new clsPartida();
 
             partida.ListadoJugadores.Add(new clsJugador("id", 0, "Ivan", false, false, false));
             partida.ListadoJugadores.Add(new clsJugador("id", 0, "Pepe", false, false, false));
