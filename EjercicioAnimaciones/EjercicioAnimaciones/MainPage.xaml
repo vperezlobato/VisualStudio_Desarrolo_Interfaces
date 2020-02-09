@@ -24,16 +24,26 @@
                              Duration="0:0:2">
                 </DoubleAnimation>
             </Storyboard>
+            <Storyboard x:Name="cambiarColor">
+                <ColorAnimation x:Name="animacionColor" Storyboard.TargetName="color"
+                             Storyboard.TargetProperty="Color"
+                             Completed="animacionColorCompleted"
+                             Duration="0:0:2">
+                </ColorAnimation>
+            </Storyboard>
         </Canvas.Resources>
         <Image Canvas.ZIndex="20" Name="stkJugador1"  Width="200" Height="200" Source="ms-appx:///Assets/Spaceship-PNG-File.png" 
                    KeyDown="{x:Bind vMGame.Grid_KeyDown,Mode=OneWay}" KeyUp="{x:Bind vMGame.Grid_KeyUp}" 
                    Canvas.Left="{Binding nave.posX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    Canvas.Top="{Binding nave.posY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></Image>
 
-        <Ellipse Width="15" Height="15" Fill="White" Stroke="Violet">
+        <Ellipse Width="15" Height="15" Stroke="Violet">
             <Ellipse.RenderTransform >
                 <TranslateTransform x:Name="TranslateTransform" Y="50" ></TranslateTransform>
             </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <SolidColorBrush x:Name="color" Color="Red"></SolidColorBrush>
+            </Ellipse.Fill>
         </Ellipse>
 
     </Canvas>

@@ -34,8 +34,9 @@ namespace EjercicioAnimaciones
             vMGame = (MainPageVM)this.DataContext;
 
             moverEstrellas.Begin();
+            cambiarColor.Begin();            
             animacionEjeY.From = 10;
-            moverEstrellas.Begin();
+            animacionColor.From = Colors.Red;
 
             for (int i = 0; i < 50; i++) {
                 Random rnd = new Random();
@@ -71,6 +72,13 @@ namespace EjercicioAnimaciones
             animacionEjeY.From = 10;
             animacionEjeY.To = 1000;
             moverEstrellas.Begin();
+        }
+
+        private void animacionColorCompleted(object sender, object e)
+        {
+            animacionColor.From = Colors.Red;
+            animacionColor.To = Colors.Green;
+            cambiarColor.Begin();
         }
 
         private Ellipse crearEllipse()
