@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="ExamenUI.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ExamenUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="using:ExamenUI.ViewModel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:MainPageVM></vm:MainPageVM>
+    </Page.DataContext>
+
+    <RelativePanel>
+        
+        <TextBox Name="txtBuscar" Text="{Binding textoABuscar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 PlaceholderText="Buscar ciudades" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True"></TextBox>
+        <ListView Name="ListadoCiudades" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="txtBuscar"
+                  ItemsSource="{Binding listadoCiudadesFiltradas,Mode=TwoWay}" 
+                  SelectedItem="{Binding ciudadSeleccionada,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Name="txtbNombre" Text="{Binding Path=nombreCiudad}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Name="nombreCiudad" FontSize="50" FontWeight="Bold" 
+                   RelativePanel.Above="listadoPredicciones" 
+                   RelativePanel.AlignHorizontalCenterWith="listadoPredicciones"
+                   Text="{Binding ciudadSeleccionada.nombreCiudad,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <ListView Name="listadoPredicciones"
+                  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"
+                  ItemsSource="{Binding listadoPrediccionesConNombreCiudadYImagen,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <RelativePanel>
+                        <RelativePanel.Resources>
+                            <Storyboard x:Name="aumentarTamaño">
+                                <DoubleAnimation x:Name="animacionAltura" 
+                                 Storyboard.TargetName="imagen"
+                                 From="0" To="30"
+                                 Duration="0:0:10"
+                                 Storyboard.TargetProperty="Width">
+                                </DoubleAnimation>
+
+                            </Storyboard>
+
+                        </RelativePanel.Resources>
+                        <Image x:Name="imagen" Source="{Binding imagen}" Width="20" Height="20" RelativePanel.AlignLeftWithPanel="True">
+                     
+                        </Image>
+                        <TextBlock RelativePanel.RightOf="imagen" Name="pronostico">Pronostico:</TextBlock>
+                        <TextBlock Name="txtPronostico" 
+                                   RelativePanel.RightOf="pronostico"
+                                   RelativePanel.AlignTopWithPanel="True"  
+                                   Text="{Binding pronostico}"></TextBlock>
+                        <TextBlock RelativePanel.RightOf="imagen" RelativePanel.Below="pronostico" Name="humedad">Humedad: </TextBlock>
+                        <TextBlock Name="txthumedad" RelativePanel.Below="txtPronostico" 
+                                   RelativePanel.RightOf="humedad"
+                                   Text="{Binding humedad}"></TextBlock>
+                        <TextBlock RelativePanel.RightOf="imagen" RelativePanel.Below="humedad" Name="tempMax">Temperatura Maxima: </TextBlock>
+                        <TextBlock Name="txtTempMax" RelativePanel.Below="txthumedad" 
+                                   RelativePanel.RightOf="tempMax"
+                                   Text="{Binding temperaturaMaxima}"></TextBlock>
+                        <TextBlock RelativePanel.RightOf="imagen" RelativePanel.Below="tempMax" Name="tempMin">Temperatura Minima: </TextBlock>
+                        <TextBlock Name="txtTempMin" RelativePanel.Below="txtTempMax" 
+                                   RelativePanel.RightOf="tempMin"
+                                   Text="{Binding temperaturaMinima}"></TextBlock>
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </RelativePanel>
+</Page>

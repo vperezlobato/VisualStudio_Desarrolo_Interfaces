@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="BotonAnimado.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BotonAnimado"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--Las animaciones pueden ser Double, Point o Color-->
+    <!--<Page.Resources>
+    cambia la opacidad del boton
+        <Storyboard x:Name="animacionBoton">
+            <DoubleAnimation
+                Storyboard.TargetName="ButtonAnimation"
+                Storyboard.TargetProperty="Opacity"
+                From="1.0" To="0.0" Duration="0:0:1">
+            </DoubleAnimation>
+        </Storyboard>
+
+        cambiar color al boton
+        <Storyboard x:Name="colorBoton">
+            <ColorAnimation
+                Storyboard.TargetName="ButtonAnimation"
+                Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                From="Red" To="Green">
+            </ColorAnimation>
+        </Storyboard>
+
+        hace que desaparezca
+        <Storyboard x:Name="myStoryboard">
+            <FadeOutThemeAnimation TargetName="myRectangle" />
+        </Storyboard>
+
+        <Storyboard x:Name="bounceAnim">
+            <DoubleAnimation From="30" To="200" Duration="00:00:3" 
+                Storyboard.TargetName="myRectangle" 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="2" EasingMode="EaseOut" 
+                                Bounciness="2"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+    </Page.Resources>
+
+    cambiar opacidad
+    <StackPanel>
+        <Rectangle x:Name="myRectangle" Fill="Red" Width="200" Height="30"/>
+        <Rectangle PointerPressed="Rectangle_Tapped" x:Name="myRectangle2"  
+              Fill="Blue" Width="200" Height="300"/>
+
+        <Button x:Name="ButtonAnimation" Content="Pulsame!" Click="ButtonAnimation_Click"></Button>
+    </StackPanel>-->
+
+    <StackPanel x:Name="LayoutRoot" >
+        <StackPanel.Resources>
+            <Storyboard x:Name="myStoryboard">
+                <DoubleAnimation From="1" To="6" Duration="00:00:3" 
+                Storyboard.TargetName="rectScaleTransform" 
+                Storyboard.TargetProperty="ScaleY">
+                    <DoubleAnimation.EasingFunction>
+                        <BounceEase Bounces="2" EasingMode="EaseOut" 
+                                Bounciness="2" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </StackPanel.Resources>
+
+        <Button Click="ButtonAnimation_Click" Width="200" Height="30">
+            <Button.RenderTransform>
+                <ScaleTransform x:Name="rectScaleTransform" />
+            </Button.RenderTransform>
+        </Button>
+
+    </StackPanel>
+</Page>

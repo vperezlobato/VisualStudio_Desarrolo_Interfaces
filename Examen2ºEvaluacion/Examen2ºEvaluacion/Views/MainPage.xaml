@@ -1,0 +1,47 @@
+﻿<Page
+<<<<<<< HEAD
+    x:Class="Examen2ºEvaluacion.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Examen2ºEvaluacion.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm ="using:Examen_UI.ViewModel"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:MainPageVM></vm:MainPageVM>
+    </Page.DataContext>
+
+    <RelativePanel>
+        <TextBlock Name="txT" RelativePanel.AlignLeftWithPanel="True">Hola</TextBlock>
+        <ListView RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="txT" 
+                  ItemsSource="{Binding listadoCiudadesFiltradas,Mode=TwoWay}" 
+                  SelectedItem="{Binding ciudadSeleccionada,Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Name="txtbNombre" Text="{Binding Path=nombreCiudad}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </RelativePanel>
+</Page>
+
+=======
+    x:Class="Examen2ºEvaluacion.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Examen2ºEvaluacion"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+    </Grid>
+</Page>
+>>>>>>> d1b429a2876663d5d862b57da28a68ea2e83f600

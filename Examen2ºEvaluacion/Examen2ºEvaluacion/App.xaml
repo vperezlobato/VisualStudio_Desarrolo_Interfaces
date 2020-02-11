@@ -1,0 +1,11 @@
+﻿<Application
+    x:Class="Examen2ºEvaluacion.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+<<<<<<< HEAD
+    xmlns:local="using:Examen_UI">
+=======
+    xmlns:local="using:Examen2ºEvaluacion">
+>>>>>>> d1b429a2876663d5d862b57da28a68ea2e83f600
+
+</Application>
