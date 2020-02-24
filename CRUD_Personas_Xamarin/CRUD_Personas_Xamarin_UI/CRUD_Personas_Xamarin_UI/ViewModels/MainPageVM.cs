@@ -20,18 +20,20 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
         private ObservableCollection<clsPersona> _listadoPersona;
         private ObservableCollection<clsDepartamento> _listadoDepartamentos;
         private clsPersona _personaSeleccionada;
+        private DelegateCommand _actualizarCommand;
+        private DelegateCommand _eliminarCommand;
+        private DelegateCommand _insertarCommand;
+        private DelegateCommand _detallesCommand;
         #endregion
 
         #region constructores
         //constructor por defecto
         public MainPageVM()
         {
+            
             //rellenamos el constructor con el listado de personas
-
             clsListadoDepartamentosBL listDepartamentos = new clsListadoDepartamentosBL();
             cargarDatos();
-
-            /*_listadoDepartamentos = new ObservableCollection<clsDepartamento>(listDepartamentos.listadoDepartamentos());*/
         }
 
         public async void cargarDatos()
@@ -50,13 +52,12 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
             get { return _personaSeleccionada; }
             set
             {
-
-                if (_personaSeleccionada != value)
-                {
                     _personaSeleccionada = value;
                     NotifyPropertyChanged("personaSeleccionada");
-
-                }
+                    _eliminarCommand.RaiseCanExecuteChanged();
+                    _actualizarCommand.RaiseCanExecuteChanged();
+                    _detallesCommand.RaiseCanExecuteChanged();
+                
             }
         }
 
@@ -76,5 +77,105 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
 
         #endregion
 
+        public DelegateCommand EliminarCommand
+        {
+            get
+            {
+
+                _eliminarCommand = new DelegateCommand(EliminarCommand_Executed, EliminarCommand_CanExecuted);
+                return _eliminarCommand;
+            }
+        }
+
+        public DelegateCommand ActualizarCommand
+        {
+            get
+            {
+                _actualizarCommand = new DelegateCommand(ActualizarCommand_Executed, ActualizarCommand_CanExecuted);
+                return _actualizarCommand;
+            }
+
+        }
+
+
+        public DelegateCommand InsertarCommand
+        {
+            get
+            {
+                _insertarCommand = new DelegateCommand(InsertarCommand_Executed);
+                return _insertarCommand;
+
+            }
+        }
+
+        public DelegateCommand DetallesCommand
+        {
+            get
+            {
+                _detallesCommand = new DelegateCommand(DetallesCommand_Executed, DetallesCommand_CanExecuted);
+                return _detallesCommand;
+
+            }
+        }
+
+
+
+        private bool EliminarCommand_CanExecuted()
+        {
+            bool eliminable = false;
+
+            if (personaSeleccionada != null)
+            {
+                eliminable = true;
+            }
+
+            return eliminable;
+        }
+
+        private void EliminarCommand_Executed()
+        {
+            
+        }
+
+
+        private bool ActualizarCommand_CanExecuted()
+        {
+            bool actualizable = false;
+
+            if (personaSeleccionada != null)
+            {
+                actualizable = true;
+            }
+
+            return actualizable;
+        }
+
+        private void ActualizarCommand_Executed()
+        {
+            //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage());
+        }
+
+        private bool DetallesCommand_CanExecuted()
+        {
+            bool valido = false;
+
+            if (personaSeleccionada != null)
+            {
+                valido = true;
+            }
+
+            return valido;
+        }
+
+        private void DetallesCommand_Executed()
+        {
+
+        }
+
+        private void InsertarCommand_Executed()
+        {
+            _personaSeleccionada = new clsPersona();
+            //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage());
+        }
     }
 }

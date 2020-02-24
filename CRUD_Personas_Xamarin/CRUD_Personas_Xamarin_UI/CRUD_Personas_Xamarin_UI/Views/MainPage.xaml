@@ -10,7 +10,9 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
-        <ListView ItemsSource="{Binding listadoPersona}">
+        <ListView Margin="16,16,0,0"
+             ItemsSource="{Binding listadoPersona,Mode=TwoWay}"
+             SelectedItem="{Binding personaSeleccionada,Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -22,6 +24,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackLayout Margin="16,0,0,16" Orientation="Horizontal">
+            <Button x:Name="btnAdd" Text="Añadir" Command="{Binding InsertarCommand}" />
+
+            <Button x:Name="btnUpdate" Text="Actualizar" Command="{Binding ActualizarCommand}" />
+
+            <Button Text="Eliminar"  Command="{Binding EliminarCommand}" />
+
+            <Button x:Name="btnDetails" Text="Detalles" Command="{Binding DetallesCommand}" />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
