@@ -25,7 +25,7 @@ namespace CRUD_Personas_Xamarin_DAL
             clsMyConnection miConexion = new clsMyConnection();
 
             String uriBase = miConexion.getUriBase();
-            Uri requestUri = new Uri(uriBase + "departamentosAPI");
+            Uri requestUri = new Uri(uriBase + "departamentos/");
 
             //Send the GET request asynchronously and retrieve the response as a string.
             HttpResponseMessage httpResponse = new HttpResponseMessage();
@@ -56,7 +56,7 @@ namespace CRUD_Personas_Xamarin_DAL
             clsMyConnection miConexion = new clsMyConnection();
 
             String uriBase = miConexion.getUriBase();
-            Uri requestUri = new Uri(uriBase + "departamentosAPI/"+id);
+            Uri requestUri = new Uri(uriBase + "departamentos/"+id);
 
             //Send the GET request asynchronously and retrieve the response as a string.
             HttpResponseMessage httpResponse = new HttpResponseMessage();

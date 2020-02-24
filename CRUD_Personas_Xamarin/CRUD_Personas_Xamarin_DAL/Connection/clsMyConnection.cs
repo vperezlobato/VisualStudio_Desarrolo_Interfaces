@@ -31,7 +31,7 @@ namespace CRUD_Personas_Xamarin_DAL
         {
 
             String uriBase = "";
-            uriBase = "https://crudpersonasui-victor.azurewebsites.net/api/";
+            uriBase = "https://crudpersonasvictor.azurewebsites.net/api/";
             return uriBase;
         }
 

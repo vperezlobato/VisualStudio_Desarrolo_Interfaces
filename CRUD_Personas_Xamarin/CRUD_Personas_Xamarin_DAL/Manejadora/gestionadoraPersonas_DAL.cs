@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CRUD_Personas_Xamarin_Entidades;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,242 +13,121 @@ namespace CRUD_Personas_Xamarin_DAL
     {
 
         /// <summary>
-        /// Funcion que recibe por parametros a un objeto clsPersona y lo inserta en la DB
+        /// Este método sirve para insertar una persona en la base de datos.
         /// </summary>
-        /// <param name="objPersona"></param>
-        /// <returns>Devuelve el numero de filas afectadas</returns>
-        /*public int insertarPersona_DAL(clsPersona objPersona) {
-
+        /// <param name="objPersona">
+        /// La persona ha insertar
+        /// </param>
+        /// <returns>
+        /// El método devuelve el número de filas afectadas.
+        /// </returns>
+        public async Task<int> insertarPersona_DAL(clsPersona objPersona)
+        {
+            HttpClient miCliente = new HttpClient();
             clsMyConnection miConexion = new clsMyConnection();
-            SqlCommand comando = new SqlCommand();
-            int filas = 0;
-            SqlConnection conexion = miConexion.getConnection();
-            System.Type tipoDBNULL = DBNull.Value.GetType();
-            String foto,fechaNacimiento,telefono,direccion,apellidos,nombre,idDepartamento;
+
+            String uriBase = miConexion.getUriBase();
+            Uri requestUri = new Uri(uriBase + "PersonasAPI/");
+            int filasAfectadas = 0;
+            String data;
+            HttpContent content;
+
+            HttpResponseMessage response = new HttpResponseMessage();
+
             try
             {
-                comando.Connection = conexion;
-
-                if (objPersona.nombre != null)
-                {
-                    comando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = objPersona.nombre;
-                    nombre = "@nombre";
-                }
-                else
-                    nombre = "NULL";
-                if (objPersona.apellidos != null)
-                {
-                    comando.Parameters.Add("@apellidosPersona", System.Data.SqlDbType.VarChar).Value = objPersona.apellidos;
-                    apellidos = "@apellidosPersona";
-                }
-                else
-                    apellidos = "NULL";
-
-                    comando.Parameters.Add("@IDDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
-                    idDepartamento = "@IDDepartamento";                
-
-                if (objPersona.fechaNacimiento != null) { 
-                    comando.Parameters.Add("@fechaNacimiento", System.Data.SqlDbType.DateTime).Value = objPersona.fechaNacimiento;
-                    fechaNacimiento = "@fechaNacimiento";
-                }else
-                    fechaNacimiento = "NULL";
-
-                if (objPersona.telefono != null) {
-                    comando.Parameters.Add("@telefonoPersona", System.Data.SqlDbType.VarChar).Value = objPersona.telefono;
-                    telefono = "@telefonoPersona";
-                } else
-                    telefono = "NULL";
-
-                if (objPersona.foto != null)
-                {
-                    comando.Parameters.Add("@fotoPersona", System.Data.SqlDbType.Binary).Value = objPersona.foto;
-                    foto = "@fotoPersona";
-                }
-                else
-                    foto = "NULL";
-
-                if (objPersona.direccion != null) {
-                    comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
-                    direccion = "@direccion";
-                } else
-                    direccion = "NULL";
-
-                comando.CommandText = "Insert Into PD_Personas (NombrePersona,ApellidosPersona,IDDepartamento,FechaNacimientoPersona,TelefonoPersona,FotoPersona,Direccion) " +
-                    "Values("+nombre+","+apellidos+","+idDepartamento+","+fechaNacimiento+","+telefono+","+foto+","+direccion+")";
-
-                filas = comando.ExecuteNonQuery();
-
-            }catch (SqlException e) {
+                data = JsonConvert.SerializeObject(objPersona);
+                content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+                response = await miCliente.PostAsync(requestUri, content);
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
-            finally {
-                miConexion.closeConnection(ref conexion); 
+
+            if (response.IsSuccessStatusCode)
+            {
+                filasAfectadas = 1;
             }
 
-            return filas;
+            return filasAfectadas;
         }
 
         /// <summary>
-        /// Funcion que recibe como parametro un entero id y borra a la persona correspondiente de ese id en la DB
+        /// Método que elimina una persona de la BBDD
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Devuelve el numero de filas afectadas</returns>
-        public int borrarPersona_DAL(int id) {
-            clsMyConnection miConexion = new clsMyConnection();
-            SqlConnection conexion = miConexion.getConnection();
-            int filas = 0;
-            SqlCommand comando = new SqlCommand();
-
-            try{
-                comando.Connection = conexion;
-
-                comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                comando.CommandText = "Delete FROM PD_Personas Where IdPersona = @id";                
-
-                filas = comando.ExecuteNonQuery();
-            }catch (SqlException e) {
-                throw e;
-            }
-            finally {
-                miConexion.closeConnection(ref conexion);
-            }
-            return filas;
-        }
-
-        /// <summary>
-        /// Funcion que recibe como parametro un objeto persona y editar sus datos en la DB
-        /// </summary>
-        /// <param name="objPersona"></param>
-        /// <returns>Devuelve el numero de filas afectadas</returns>
-        public int editarPersona_DAL(clsPersona objPersona)
+        /// <param name="idPersona">
+        /// ID de la persona a eliminar
+        /// </param>
+        /// <returns>
+        /// El numero de filas afectadas
+        /// </returns>
+        public async Task<int> borrarPersona_DAL(int idPersona)
         {
 
+            HttpClient miCliente = new HttpClient();
             clsMyConnection miConexion = new clsMyConnection();
-            SqlConnection conexion = miConexion.getConnection();
-            SqlCommand comando = new SqlCommand();
-            int filas = 0;
-            String fechaNacimiento, telefono, direccion, apellidos, nombre, idDepartamento, idPersona, foto;
+
+            String uriBase = miConexion.getUriBase();
+            Uri requestUri = new Uri(uriBase + "PersonasAPI/"+idPersona);
+            int filasAfectadas = 0;
 
             try
             {
-                comando.Connection = conexion;
-
-                if (objPersona.nombre != null)
+                HttpResponseMessage response = await miCliente.DeleteAsync(requestUri);
+                if (response.IsSuccessStatusCode)
                 {
-                    comando.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = objPersona.nombre;
-                    nombre = "@nombre";
+                    filasAfectadas = 1;
                 }
-                else
-                    nombre = "NULL";
-                if (objPersona.apellidos != null)
-                {
-                    comando.Parameters.Add("@apellidosPersona", System.Data.SqlDbType.VarChar).Value = objPersona.apellidos;
-                    apellidos = "@apellidosPersona";
-                }
-                else
-                    apellidos = "NULL";
-
-
-                comando.Parameters.Add("@IDDepartamento", System.Data.SqlDbType.Int).Value = objPersona.idDepartamento;
-                idDepartamento = "@IDDepartamento";
-
-                if (objPersona.fechaNacimiento != null)
-                {
-                    comando.Parameters.Add("@fechaNacimiento", System.Data.SqlDbType.DateTime).Value = objPersona.fechaNacimiento;
-                    fechaNacimiento = "@fechaNacimiento";
-                }
-                else
-                    fechaNacimiento = "NULL";
-
-                if (objPersona.telefono != null)
-                {
-                    comando.Parameters.Add("@telefonoPersona", System.Data.SqlDbType.VarChar).Value = objPersona.telefono;
-                    telefono = "@telefonoPersona";
-                }
-                else
-                    telefono = "NULL";
-
-                if (objPersona.foto != null)
-                {
-                    comando.Parameters.Add("@fotoPersona", System.Data.SqlDbType.Binary).Value = objPersona.foto;
-                    foto = "@fotoPersona";
-                }
-                else
-                    foto = "NULL";
-
-                if (objPersona.direccion != null)
-                {
-                    comando.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar).Value = objPersona.direccion;
-                    direccion = "@direccion";
-                }
-                else
-                    direccion = "NULL";
-
-                comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = objPersona.idPersona;
-                idPersona = "@id";
-
-                comando.CommandText = "UPDATE PD_Personas SET NombrePersona =" + nombre + ",ApellidosPersona=" + apellidos + ",IDDepartamento=" + idDepartamento + ",FechaNacimientoPersona=" + fechaNacimiento + "," +
-                    "TelefonoPersona=" + telefono + ",FotoPersona=" + foto + ",Direccion=" + direccion + " Where IdPersona=" + idPersona;
-
-                filas = comando.ExecuteNonQuery();
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 throw e;
             }
-            finally
-            {
-                miConexion.closeConnection(ref conexion);
-            }
-            return filas;
-
+           
+            return filasAfectadas;
         }
 
         /// <summary>
-        /// Funcion que recibe como parametro un entero id y devuelve la persona correspondiente a ese id. 
+        /// Comentario: Este método nos permite actualizar una persona en la base de datos.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Devuelve un objeto persona</returns>
-        public clsPersona buscarPersona_DAL(int id) {
-            clsPersona objPersona = new clsPersona();
+        /// <param name="oPersona">
+        /// Actualización de la persona.
+        /// </param>
+        /// <returns>
+        /// El método devuelve un entero asociado al nombre que es el número de filas afectadas.
+        /// </returns>
+        public async Task<int> actualizarPersona_DAL(clsPersona objPersona)
+        {
 
+            HttpClient miCliente = new HttpClient();
             clsMyConnection miConexion = new clsMyConnection();
-            SqlConnection conexion = miConexion.getConnection();
-            SqlCommand comando = new SqlCommand();
-            SqlDataReader miLector = null;
-            System.Type tipoDBNULL = DBNull.Value.GetType();
-            String idPersona;
+
+            String uriBase = miConexion.getUriBase();
+            Uri requestUri = new Uri(uriBase + "PersonasAPI/" + objPersona.idPersona);
+            int filasAfectadas = 0;
+            String data;
+            HttpContent content;
+
+            HttpResponseMessage response = new HttpResponseMessage();
+
             try
             {
-                comando.Connection = conexion;
-                comando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                idPersona = "@id";
-                comando.CommandText = "Select * From PD_Personas Where Idpersona =" +idPersona;
-                miLector = comando.ExecuteReader();
-
-                if (miLector.HasRows)
-                {
-                    miLector.Read();
-
-                    objPersona.idPersona = miLector["IdPersona"].GetType() != tipoDBNULL ? (int)miLector["IdPersona"] : 0;
-                    objPersona.nombre = miLector["NombrePersona"].GetType() != tipoDBNULL ? (string)miLector["NombrePersona"] : null;
-                    objPersona.apellidos = miLector["ApellidosPersona"].GetType() != tipoDBNULL ? (string)miLector["ApellidosPersona"] : null;
-                    objPersona.fechaNacimiento = miLector["FechaNacimientoPersona"].GetType() != tipoDBNULL ? (DateTime)miLector["FechaNacimientoPersona"] : new DateTime();
-                    objPersona.direccion = miLector["Direccion"].GetType() != tipoDBNULL ? (string)miLector["Direccion"] : null;
-                    objPersona.telefono = miLector["TelefonoPersona"].GetType() != tipoDBNULL ? (string)miLector["TelefonoPersona"] : null;
-                    objPersona.foto = miLector["FotoPersona"].GetType() != tipoDBNULL ? (byte[])miLector["FotoPersona"] : null;
-                    objPersona.idDepartamento = miLector["IDDepartamento"].GetType() != tipoDBNULL ? (int)miLector["IDDepartamento"] : 0;
-                }
-
-                miLector.Close();
+                data = JsonConvert.SerializeObject(objPersona);
+                content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+                response = await miCliente.PutAsync(requestUri, content);
             }
-            catch (SqlException e) {
+            catch (Exception e)
+            {
                 throw e;
             }
-            finally{
-                miConexion.closeConnection(ref conexion);
+
+            if (response.IsSuccessStatusCode)
+            {
+                filasAfectadas = 1;
             }
-            return objPersona;
-        }*/
+
+            return filasAfectadas;
+        }
     }
 }

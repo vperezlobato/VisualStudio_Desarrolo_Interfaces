@@ -27,6 +27,7 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
             }
             set {
                 _personaSeleccionada = value;
+                NotifyPropertyChanged("personaSeleccionada");
             }
         }
 
@@ -45,7 +46,7 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
             try
             {
                 _departamento = await departamento.departamentoPorIDBL(_personaSeleccionada.idDepartamento);
-                NotifyPropertyChanged("PersonsDepartament");
+                NotifyPropertyChanged("departamento");
             }
             catch (Exception)
             {

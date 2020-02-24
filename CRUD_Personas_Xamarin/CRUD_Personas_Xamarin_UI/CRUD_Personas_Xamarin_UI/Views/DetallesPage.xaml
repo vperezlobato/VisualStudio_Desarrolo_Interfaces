@@ -6,31 +6,69 @@
              xmlns:vm ="clr-namespace:CRUD_Personas_Xamarin_UI.ViewModels">
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Pantalla de Detalles!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <RelativeLayout Margin="16,16,0,0">
+            <Label x:Name="detalles" Text="Detalles" />
+            <Label Text="Nombre:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=detalles, Property=Y, Factor=2,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=detalles, Property=X, Factor=0, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
 
-            <Label Text="{Binding personaSeleccionada.nombrePersona}"
-                   VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding personaSeleccionada.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=2,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=X, Factor=1, Constant=60}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
+            
+            <Label x:Name="Apellidos" Text="Apellidos:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=3,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=X, Factor=0, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
 
-            <Label Text="{Binding personaSeleccionada.apellidosPersona}"
-                   VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding personaSeleccionada.apellidos}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=3,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=X, Factor=1, Constant=60}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
+            
+            
+            <Label x:Name="Direccion" Text="Direccion:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=4,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=X, Factor=0, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
 
-            <Label Text="{Binding personaSeleccionada.telefonoPersona}"
-                   VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding personaSeleccionada.direccion}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=4,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=X, Factor=1, Constant=60}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
 
-            <Label Text="{Binding personaSeleccionada.fechaNacimientoPersona}"
-                   VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="telefono" Text="Telefono:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=5,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=X, Factor=0, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
 
-            <Label Text="{Binding departamento.Nombre}"
-                   VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding personaSeleccionada.telefono}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=5,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=X, Factor=1, Constant=60}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
 
-        </StackLayout>
+            <Label x:Name="fechaNacimiento" Text="Fecha de nacimiento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=6,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=X, Factor=0, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
+
+            <Label Text="{Binding personaSeleccionada.fechaNacimiento}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=6,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=X, Factor=1, Constant=120}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
+
+            <Label x:Name="nombreDepartamento" Text="Departamento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=7,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=X, Factor=0, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
+
+            <Label Text="{Binding departamento.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=Y, Factor=7,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=X, Factor=1, Constant=90}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=0.5,Constant=0}"/>
+            
+        </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>

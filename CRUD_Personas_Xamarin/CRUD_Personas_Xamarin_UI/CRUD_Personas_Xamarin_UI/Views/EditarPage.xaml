@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CRUD_Personas_Xamarin_UI"
+             x:Class="CRUD_Personas_Xamarin_UI.EditarPage"
+             xmlns:vm ="clr-namespace:CRUD_Personas_Xamarin_UI.ViewModels">
+
+    <ContentPage.Content>
+        <RelativeLayout Margin="16,16,0,0">
+            <Label x:Name="detalles" Text="Detalles" />
+            <Label Text="Nombre:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=detalles, Property=Y, Factor=2,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=detalles, Property=X, Factor=0, Constant=0}"/>
+
+            <Entry Text="{Binding persona.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=2,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=X, Factor=1, Constant=60}"/>
+
+            <Label x:Name="Apellidos" Text="Apellidos:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=3,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=X, Factor=0, Constant=0}"/>
+
+            <Entry Text="{Binding persona.apellidos}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=3,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=X, Factor=1, Constant=60}"/>
+
+
+            <Label x:Name="Direccion" Text="Direccion:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=4,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=X, Factor=0, Constant=0}"/>
+
+            <Entry Text="{Binding persona.direccion}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=4,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=X, Factor=1, Constant=60}"/>
+
+            <Label x:Name="telefono" Text="Telefono:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=5,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=X, Factor=0, Constant=0}"/>
+
+            <Entry Text="{Binding persona.telefono}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=5,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=X, Factor=1, Constant=60}"/>
+
+            <Label x:Name="fechaNacimiento" Text="Fecha de nacimiento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=6,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=X, Factor=0, Constant=0}"/>
+
+            <Entry Text="{Binding persona.fechaNacimiento}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=6,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=X, Factor=1, Constant=120}"/>
+
+            <Label x:Name="nombreDepartamento" Text="Departamento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=7,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=X, Factor=0, Constant=0}"/>
+
+            <Entry Text="{Binding departamento.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=Y, Factor=7,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=X, Factor=1, Constant=90}"/>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

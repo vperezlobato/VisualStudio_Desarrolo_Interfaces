@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace CRUD_Personas_Xamarin_UI.ViewModels
 {
@@ -34,11 +35,16 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
         public async void cargarDatos()
         {
             clsListadoPersonasBL listPersonas = new clsListadoPersonasBL();
+            try
+            {
+                List<clsPersona> list = await listPersonas.listadoPersonas_BL();
 
-            List<clsPersona> list = await listPersonas.listadoPersonas_BL();
-
-            this._listadoPersona = new ObservableCollection<clsPersona>(list);
-            NotifyPropertyChanged("listadoPersona");
+                this._listadoPersona = new ObservableCollection<clsPersona>(list);
+                NotifyPropertyChanged("listadoPersona");
+            }
+            catch (Exception e) {
+                falloDeConexion();
+            }
         }
         #endregion
         #region propiedades publicas
@@ -127,11 +133,28 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
             return eliminable;
         }
 
-        private void EliminarCommand_Executed()
+        private async void EliminarCommand_Executed()
         {
-            
+            int filasAfectadas = 0;
+            gestionadoraPersonas_BL gestionadora = new gestionadoraPersonas_BL();
+            bool answer = await Application.Current.MainPage.DisplayAlert("Confirmar", "¿Estas seguro de que deseas borrar esta persona?", "Si", "No");
+            if (answer) {
+                try
+                {
+                    filasAfectadas = await gestionadora.borrarPersona_BL(_personaSeleccionada.idPersona);
+                    if (filasAfectadas == 1) {
+                        await Application.Current.MainPage.DisplayAlert("Eliminado", "Se ha eliminado correctamente", "OK");
+                        cargarDatos();
+                        NotifyPropertyChanged("listadoPersona");
+                        _personaSeleccionada = null;
+                        NotifyPropertyChanged("personaSeleccionada");
+                    }
+                }
+                catch (Exception e) {
+                    falloDeConexion();
+                }
+            }
         }
-
 
         private bool ActualizarCommand_CanExecuted()
         {
@@ -147,7 +170,7 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
 
         private void ActualizarCommand_Executed()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage(personaSeleccionada));
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new EditarPage(personaSeleccionada));
         }
 
         private bool DetallesCommand_CanExecuted()
@@ -164,13 +187,23 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
 
         private void DetallesCommand_Executed()
         {
-
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage(personaSeleccionada));
         }
 
         private void InsertarCommand_Executed()
         {
             _personaSeleccionada = new clsPersona();
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage(personaSeleccionada));
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new EditarPage(personaSeleccionada));
+        }
+
+        /// <summary>
+        /// Metodo que muestra un dialogo en caso de error en la conexion a la api
+        /// </summary>
+        private async void falloDeConexion()
+        {
+            await Application.Current.MainPage.DisplayAlert("Alert", "Error en la conexión", "OK");
+
+            return;
         }
     }
 }
