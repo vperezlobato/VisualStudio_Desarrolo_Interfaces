@@ -9,7 +9,7 @@
         <vm:DetallesVM></vm:DetallesVM>
     </ContentPage.BindingContext>
     <StackLayout>
-        
+        <Label Text="Hola"></Label>
     </StackLayout>
     
 </ContentPage>

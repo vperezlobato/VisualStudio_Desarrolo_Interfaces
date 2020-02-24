@@ -152,7 +152,7 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
 
         private void ActualizarCommand_Executed()
         {
-            //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage(personaSeleccionada));
         }
 
         private bool DetallesCommand_CanExecuted()
@@ -175,7 +175,7 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
         private void InsertarCommand_Executed()
         {
             _personaSeleccionada = new clsPersona();
-            //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new DetallesPage(personaSeleccionada));
         }
     }
 }

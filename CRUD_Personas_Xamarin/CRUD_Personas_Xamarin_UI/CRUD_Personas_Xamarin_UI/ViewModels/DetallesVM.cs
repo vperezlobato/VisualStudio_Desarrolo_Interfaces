@@ -9,6 +9,10 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
     {
         private clsPersona _personaSeleccionada;
 
+        public DetallesVM()
+        {
+        }
+
         public DetallesVM(clsPersona persona) {
             _personaSeleccionada = persona;
         }

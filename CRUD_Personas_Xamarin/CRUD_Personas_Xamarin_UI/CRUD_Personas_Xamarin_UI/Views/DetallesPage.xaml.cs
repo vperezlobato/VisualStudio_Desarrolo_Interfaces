@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRUD_Personas_Xamarin_Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,9 @@ namespace CRUD_Personas_Xamarin_UI
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetallesPage : ContentPage
 	{
-		public DetallesPage ()
+		public DetallesPage (clsPersona personaSeleccionada)
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }
