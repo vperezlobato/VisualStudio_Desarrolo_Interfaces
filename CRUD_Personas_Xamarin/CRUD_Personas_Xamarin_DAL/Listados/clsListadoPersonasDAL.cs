@@ -46,35 +46,6 @@ namespace CRUD_Personas_Xamarin_DAL
             return listadoPersonas;
 
         }
-
-        /// <summary>
-        /// Metodo para comprobar que existe la persona
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /*public Boolean existePersona_DAL(int id)
-        {
-            clsMyConnection miConexion = new clsMyConnection();
-            SqlConnection connection = miConexion.getConnection();
-            SqlCommand miComando = new SqlCommand();
-            SqlDataReader miLector;
-            Boolean existe = false;
-
-
-            miComando.CommandText = "SELECT * FROM PD_Personas Where Idpersona =" + id;
-            miComando.Connection = connection;
-            miLector = miComando.ExecuteReader();
-
-            if (miLector.HasRows)
-            {
-                existe = true;
-            }
-
-            miLector.Close();
-            miConexion.closeConnection(ref connection);
-
-            return existe;
-        }*/
     }
 
 }

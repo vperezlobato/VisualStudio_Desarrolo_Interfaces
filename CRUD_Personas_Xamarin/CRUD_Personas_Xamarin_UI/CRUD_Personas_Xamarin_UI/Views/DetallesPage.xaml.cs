@@ -1,4 +1,5 @@
 ﻿using CRUD_Personas_Xamarin_Entidades;
+using CRUD_Personas_Xamarin_UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace CRUD_Personas_Xamarin_UI
 		public DetallesPage (clsPersona personaSeleccionada)
 		{
 			InitializeComponent();
-		}
+            BindingContext = new DetallesVM(personaSeleccionada);
+        }
 	}
 }

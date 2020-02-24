@@ -20,17 +20,6 @@ namespace CRUD_Personas_Xamarin_BL
             return listado;
         }
 
-        /* public Boolean existePersona_BL(int id)
-         {
-
-             Boolean existe = false;
-
-             clsListadoPersonasDAL listadoPersonasDAL = new clsListadoPersonasDAL();
-
-             existe = listadoPersonasDAL.existePersona_DAL(id);
-
-             return existe;
-         }*/
     }
 
 }

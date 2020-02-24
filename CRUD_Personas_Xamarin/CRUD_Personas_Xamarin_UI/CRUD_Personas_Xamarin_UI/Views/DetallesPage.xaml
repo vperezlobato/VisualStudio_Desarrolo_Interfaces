@@ -5,11 +5,32 @@
              x:Class="CRUD_Personas_Xamarin_UI.DetallesPage"
              xmlns:vm ="clr-namespace:CRUD_Personas_Xamarin_UI.ViewModels">
 
-    <ContentPage.BindingContext>
-        <vm:DetallesVM></vm:DetallesVM>
-    </ContentPage.BindingContext>
-    <StackLayout>
-        <Label Text="Hola"></Label>
-    </StackLayout>
-    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Pantalla de Detalles!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <Label Text="{Binding personaSeleccionada.nombrePersona}"
+                   VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="{Binding personaSeleccionada.apellidosPersona}"
+                   VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="{Binding personaSeleccionada.telefonoPersona}"
+                   VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="{Binding personaSeleccionada.fechaNacimientoPersona}"
+                   VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="{Binding departamento.Nombre}"
+                   VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

@@ -10,24 +10,26 @@ namespace CRUD_Personas_Xamarin_BL
 {
     public class clsListadoDepartamentosBL
     {
-        /*public List<clsDepartamento> listadoDepartamentos()
+
+        public async Task<List<clsDepartamento>> listadoDepartamentosBL()
         {
-            List<clsDepartamento> listado = new List<clsDepartamento>();
 
-            clsListadoDepartamentosDAL listadoDepartamentosDal = new clsListadoDepartamentosDAL();
+            clsListadoDepartamentosDAL listadoDepartamentosDAL = new clsListadoDepartamentosDAL();
 
-            listado = listadoDepartamentosDal.listadoDepartamentos();
+            List<clsDepartamento> listado = await listadoDepartamentosDAL.listadoDepartamentos();
 
             return listado;
         }
 
-        public clsDepartamento departamentoPorID(int id)
+        public async Task<clsDepartamento> departamentoPorIDBL(int id)
         {
-            clsListadoDepartamentosDAL listBBDD = new clsListadoDepartamentosDAL();
-            clsDepartamento objDepartamento = new clsDepartamento();
-            objDepartamento = listBBDD.departamentoPorID(id);
 
-            return objDepartamento;
-        }*/
+            clsListadoDepartamentosDAL listadoDepartamentosDAL = new clsListadoDepartamentosDAL();
+
+            clsDepartamento departamento = await listadoDepartamentosDAL.departamentoPorID(id);
+
+            return departamento;
+        }
+
     }
 }

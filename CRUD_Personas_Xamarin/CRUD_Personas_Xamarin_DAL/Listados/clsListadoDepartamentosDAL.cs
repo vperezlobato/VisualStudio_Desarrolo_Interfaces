@@ -1,7 +1,9 @@
 ﻿using CRUD_Personas_Xamarin_Entidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,79 +12,70 @@ namespace CRUD_Personas_Xamarin_DAL
     public class clsListadoDepartamentosDAL
     {
 
-        /*public List<clsDepartamento> listadoDepartamentos(){
+        /// <summary>
+        /// Este metodo nos permite obtener un listado de los departamentos almacenados en la BBDD.
+        /// </summary>
+        /// <returns>Devuelve un list de clsDepartamento</returns>
+        public async Task<List<clsDepartamento>> listadoDepartamentos()
+        {
 
+            List<clsDepartamento> listadoDepartamentos = new List<clsDepartamento>();
+
+            HttpClient miCliente = new HttpClient();
             clsMyConnection miConexion = new clsMyConnection();
-            SqlConnection conexion = miConexion.getConnection();
-            SqlCommand comando = new SqlCommand();
-            SqlDataReader miLector= null;
-            System.Type tipoDBNULL = DBNull.Value.GetType();
-            clsDepartamento objDepartamento = new clsDepartamento();
-            List<clsDepartamento> listado = new List<clsDepartamento>();
 
+            String uriBase = miConexion.getUriBase();
+            Uri requestUri = new Uri(uriBase + "departamentosAPI");
+
+            //Send the GET request asynchronously and retrieve the response as a string.
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            string httpResponseBody = "";
 
             try
             {
-                comando.Connection = conexion;
-
-                comando.CommandText = "Select * from PD_Departamentos";
-                miLector = comando.ExecuteReader();
-
-                if (miLector.HasRows)
-                {
-                    while (miLector.Read())
-                    {
-                        objDepartamento = new clsDepartamento();
-                        objDepartamento.id = miLector["IdDepartamento"].GetType() != tipoDBNULL ? (int)miLector["IdDepartamento"] : 0;
-                        objDepartamento.nombre = miLector["NombreDepartamento"].GetType() != tipoDBNULL ? (string)miLector["NombreDepartamento"] : null;
-                        listado.Add(objDepartamento);
-                    }
-                }
-                miLector.Close();
+                //Send the GET request
+                httpResponse = await miCliente.GetAsync(requestUri);
+                httpResponse.EnsureSuccessStatusCode();
+                httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                listadoDepartamentos = JsonConvert.DeserializeObject<List<clsDepartamento>>(httpResponseBody);
             }
-            catch (SqlException e)
+            catch (Exception ex)
             {
-                throw e;
+                httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
             }
-            finally
-            {
-                miConexion.closeConnection(ref conexion);
-            }
-            return listado;
+
+            return listadoDepartamentos;
+
         }
 
-        public clsDepartamento departamentoPorID(int id)
+        public async Task<clsDepartamento> departamentoPorID(int id)
         {
-            clsDepartamento objDepartamento = new clsDepartamento();
+            clsDepartamento departamento = new clsDepartamento();
+
+            HttpClient miCliente = new HttpClient();
             clsMyConnection miConexion = new clsMyConnection();
-            SqlConnection conexion = miConexion.getConnection();
-            SqlCommand miComando = new SqlCommand();
-            SqlDataReader miLector;
+
+            String uriBase = miConexion.getUriBase();
+            Uri requestUri = new Uri(uriBase + "departamentosAPI/"+id);
+
+            //Send the GET request asynchronously and retrieve the response as a string.
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            string httpResponseBody = "";
 
             try
             {
-                miComando.CommandText = "SELECT * FROM PD_Departamentos WHERE IDDepartamento  = " + id;
-                miComando.Connection = conexion;
-                miLector = miComando.ExecuteReader();
-                //Si hay lineas en el lector
-                if (miLector.HasRows)
-                {
-                    while (miLector.Read())
-                    {
-                        objDepartamento = new clsDepartamento();
-                        objDepartamento.id = (int)miLector["IDDepartamento"];
-                        objDepartamento.nombre = (string)miLector["NombreDepartamento"];
-                    }
-                }
-                miLector.Close();
-                miConexion.closeConnection(ref conexion);
+                //Send the GET request
+                httpResponse = await miCliente.GetAsync(requestUri);
+                httpResponse.EnsureSuccessStatusCode();
+                httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                departamento = JsonConvert.DeserializeObject<clsDepartamento>(httpResponseBody);
             }
-            catch (SqlException exSql)
+            catch (Exception ex)
             {
-                throw exSql;
+                httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
             }
 
-            return objDepartamento;
-        }*/
+            return departamento;
+        }
     }
 }
