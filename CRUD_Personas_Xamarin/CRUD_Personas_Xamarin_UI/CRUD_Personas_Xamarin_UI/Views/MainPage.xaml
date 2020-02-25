@@ -10,6 +10,7 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
+        <Label Margin="16,16,0,0" x:Name="crear" Text="Pagina Principal" />
         <ListView Margin="16,16,0,0"
              ItemsSource="{Binding listadoPersona,Mode=TwoWay}"
              SelectedItem="{Binding personaSeleccionada,Mode=TwoWay}">

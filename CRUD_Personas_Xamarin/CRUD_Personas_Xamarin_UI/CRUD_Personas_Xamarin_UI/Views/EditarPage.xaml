@@ -7,43 +7,62 @@
 
     <ContentPage.Content>
         <RelativeLayout Margin="16,16,0,0">
-            <Label x:Name="detalles" Text="Detalles" />
+            <Label x:Name="crear" Text="Crear/Editar" />
             <Label Text="Nombre:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=detalles, Property=Y, Factor=2,Constant=0}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=detalles, Property=X, Factor=0, Constant=0}"/>
 
-            <Entry Text="{Binding persona.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=2,Constant=0}"
+            <Entry x:Name="entryNombre" WidthRequest="150" Text="{Binding persona.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=2,Constant=0}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=X, Factor=1, Constant=60}"/>
 
-            <Label x:Name="Apellidos" Text="Apellidos:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=3,Constant=0}"
+            <Label TextColor="Red" Text="{Binding ErrorNombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryNombre, Property=Y, Factor=2,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryNombre, Property=X, Factor=3, Constant=190}"/>
+            
+            <Label x:Name="Apellidos" Text="Apellidos:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=Y, Factor=3,Constant=30}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Nombre, Property=X, Factor=0, Constant=0}"/>
 
-            <Entry Text="{Binding persona.apellidos}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=3,Constant=0}"
+            <Entry WidthRequest="150" x:Name="entryApellidos" Text="{Binding persona.apellidos}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=3,Constant=30}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=X, Factor=1, Constant=60}"/>
 
+            <Label TextColor="Red" Text="{Binding ErrorApellidos}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryApellidos, Property=Y, Factor=3,Constant=30}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryApellidos, Property=X, Factor=3, Constant=190}"/>
 
-            <Label x:Name="Direccion" Text="Direccion:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=4,Constant=0}"
+
+            <Label x:Name="Direccion" Text="Direccion:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=Y, Factor=4,Constant=60}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Apellidos, Property=X, Factor=0, Constant=0}"/>
 
-            <Entry Text="{Binding persona.direccion}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=4,Constant=0}"
+            <Entry x:Name="entryDireccion" WidthRequest="150" Text="{Binding persona.direccion}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=4,Constant=60}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=X, Factor=1, Constant=60}"/>
 
-            <Label x:Name="telefono" Text="Telefono:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=5,Constant=0}"
+            <Label TextColor="Red" Text="{Binding ErrorDireccion}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryDireccion, Property=Y, Factor=4,Constant=60}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryDireccion, Property=X, Factor=3, Constant=190}"/>
+            
+            <Label x:Name="telefono" Text="Telefono:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=Y, Factor=5,Constant=90}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=Direccion, Property=X, Factor=0, Constant=0}"/>
 
-            <Entry Text="{Binding persona.telefono}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=5,Constant=0}"
+            <Entry x:Name="entryTelefono" WidthRequest="150" Text="{Binding persona.telefono}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=5,Constant=90}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=X, Factor=1, Constant=60}"/>
 
-            <Label x:Name="fechaNacimiento" Text="Fecha de nacimiento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=6,Constant=0}"
+            <Label TextColor="Red" Text="{Binding ErrorTelefono}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryTelefono, Property=Y, Factor=5,Constant=90}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=entryTelefono, Property=X, Factor=3, Constant=190}"/>
+            
+            <Label x:Name="fechaNacimiento" Text="Fecha de nacimiento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=Y, Factor=6,Constant=120}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=telefono, Property=X, Factor=0, Constant=0}"/>
 
-            <Entry Text="{Binding persona.fechaNacimiento}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=6,Constant=0}"
+            <DatePicker Date="{Binding persona.fechaNacimiento, Mode=TwoWay, UpdateSourceEventName=persona.fechaNacimiento}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=6,Constant=120}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=X, Factor=1, Constant=120}"/>
 
-            <Label x:Name="nombreDepartamento" Text="Departamento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=7,Constant=0}"
+            <Label x:Name="nombreDepartamento" Text="Departamento:" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=Y, Factor=7,Constant=150}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=fechaNacimiento, Property=X, Factor=0, Constant=0}"/>
 
-            <Entry Text="{Binding departamento.nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=Y, Factor=7,Constant=0}"
+            <Picker x:Name="picker" WidthRequest="100" ItemsSource="{Binding departamentos}" SelectedItem="{Binding departamentoSeleccionado, Mode=TwoWay}" ItemDisplayBinding="{Binding nombre}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=Y, Factor=7,Constant=150}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=nombreDepartamento, Property=X, Factor=1, Constant=90}"/>
+
+            <Label x:Name="txterrorDept" TextColor="Red" Text="{Binding ErrorDepartamento}" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=picker, Property=Y, Factor=7,Constant=150}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=picker, Property=X, Factor=3, Constant=190}"/>
+
+            <Button Text="Guardar" Command="{Binding EditarCommand}" 
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=txterrorDept, Property=Y, Factor=8,Constant=180}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,ElementName=txterrorDept, Property=X, Factor=1, Constant=130}"></Button>
         </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>

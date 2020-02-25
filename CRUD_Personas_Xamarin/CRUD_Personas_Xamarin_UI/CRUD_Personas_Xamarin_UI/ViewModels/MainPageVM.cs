@@ -14,7 +14,6 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
 
         #region atributos privados
         private ObservableCollection<clsPersona> _listadoPersona;
-        private ObservableCollection<clsDepartamento> _listadoDepartamentos;
         private clsPersona _personaSeleccionada;
         private DelegateCommand _actualizarCommand;
         private DelegateCommand _eliminarCommand;
@@ -26,9 +25,6 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
         //constructor por defecto
         public MainPageVM()
         {
-            
-            //rellenamos el constructor con el listado de personas
-            clsListadoDepartamentosBL listDepartamentos = new clsListadoDepartamentosBL();
             cargarDatos();
         }
 
@@ -68,12 +64,6 @@ namespace CRUD_Personas_Xamarin_UI.ViewModels
             set {
                 _listadoPersona = value;
             }
-        }
-
-        public ObservableCollection<clsDepartamento> listadoDepartamentos
-        {
-            get { return _listadoDepartamentos; }
-            set { _listadoDepartamentos = value; }
         }
 
         #endregion
